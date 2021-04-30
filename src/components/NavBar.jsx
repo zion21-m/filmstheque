@@ -2,11 +2,11 @@ const NavBar = () => {
   return (
     <div>
       <div>
-        <a>LOGO</a>
+        <p>LOGO</p>
       </div>
       <div>
-        <a>HOME</a>
-        <a>MOVIES</a>
+        <p>HOME</p>
+        <p>MOVIES</p>
       </div>
     </div>
   );
