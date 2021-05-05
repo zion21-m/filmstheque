@@ -23,6 +23,7 @@ const HomePopularSection = styled.section`
 const Home = () => {
   const [trend, setTrend] = useState();
   const [popular, setPopular] = useState();
+  // setSearch(searchApiLink)
   useEffect(function () {
     fetch(
       "https://api.themoviedb.org/3/trending/all/day?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c"

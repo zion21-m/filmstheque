@@ -3,7 +3,7 @@ import Input from "../Input/Input";
 import { StyledNavigationBar } from "./NavBarStyle";
 // import { useState } from "react";
 
-const NavBar = () => {
+const NavBar = (props) => {
   return (
     <StyledNavigationBar>
       <ul>
@@ -23,7 +23,12 @@ const NavBar = () => {
           </NavLink>
         </li>
       </ul>
-      <Input type="search" placeholder="Rechercher un film" />
+      <Input
+        type="search"
+        placeholder="Rechercher un film"
+        onChange={props.onChange}
+        onClick={props.onClick}
+      />
     </StyledNavigationBar>
   );
 };

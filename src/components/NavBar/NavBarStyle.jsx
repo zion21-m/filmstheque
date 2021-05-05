@@ -21,7 +21,7 @@ export const StyledNavigationBar = styled.div`
     color: #ffa106;
     border-bottom: 1px solid #ffa106;
   }
-  &:hover {
+  .navbar-item:hover {
     color: #ffa106;
   }
 `;
