@@ -4,10 +4,11 @@ import styled from "styled-components";
 
 const MovieSection = styled.section`
   padding: 1rem;
+  background-color: #e5e5e5;
   .moviesContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
   }
   h1 {
     font-size: 1.3rem;
@@ -29,10 +30,11 @@ const Movies = () => {
       .then(function (data) {
         const movies = data;
         setMovieByPopularity(movies.results);
-        console.log("movies", movieByPopularity);
       });
   }, []);
-  const poster = "https://image.tmdb.org/t/p/w500";
+  console.log("movies", movieByPopularity);
+
+  const poster = "https://image.tmdb.org/t/p/w1280";
 
   const arrayMoviesByPopularity = [];
   for (let index in movieByPopularity) {
@@ -47,6 +49,7 @@ const Movies = () => {
           src={poster + movie.poster_path}
           title={movie.title ? movie.title : movie.name}
           popularity={`Popularité: ${movie.popularity}`}
+          details={`${movie.overview}`}
         />
       );
     });

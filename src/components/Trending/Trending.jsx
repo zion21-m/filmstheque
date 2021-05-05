@@ -6,7 +6,7 @@ const poster = "https://image.tmdb.org/t/p/w500";
 const TrendingMovies = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   padding: 1rem;
 `;
 
@@ -22,6 +22,7 @@ export default function Trending({ moviesTrending }) {
           <CardContainer
             src={poster + movie.poster_path}
             title={movie.title ? movie.title : movie.name}
+            details={`${movie.overview}`}
           />
         );
       })}

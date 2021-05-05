@@ -5,6 +5,15 @@ import PopularMovies from "../PopularMovies/PopularMovies";
 
 const HomeSectionTrending = styled.section`
   padding: 1rem;
+  background: #e5e5e5;
+  h1 {
+    font-size: 1.4rem;
+    margin-left: 2rem;
+  }
+`;
+const HomePopularSection = styled.section`
+  padding: 1rem;
+  background: #e5e5e5;
   h1 {
     font-size: 1.4rem;
     margin-left: 2rem;
@@ -38,12 +47,16 @@ const Home = () => {
   }, []);
   console.log("from home", popular);
   return (
-    <HomeSectionTrending>
-      <h1>Trending</h1>
-      <Trending moviesTrending={trend} />
-      <h1>Populaire</h1>
-      <PopularMovies popularMovies={popular} />
-    </HomeSectionTrending>
+    <>
+      <HomeSectionTrending>
+        <h1>Trending</h1>
+        <Trending moviesTrending={trend} />
+      </HomeSectionTrending>
+      <HomePopularSection>
+        <h1>Populaire</h1>
+        <PopularMovies popularMovies={popular} />
+      </HomePopularSection>
+    </>
   );
 };
 
