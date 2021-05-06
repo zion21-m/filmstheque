@@ -50,6 +50,8 @@ const Movies = () => {
           title={movie.title ? movie.title : movie.name}
           popularity={`Popularité: ${movie.popularity}`}
           details={`${movie.overview}`}
+          id={movie.id}
+          type="movie"
         />
       );
     });

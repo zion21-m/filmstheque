@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 const MoreInformations = styled.div`
   background-color: #1985a1;
   color: white;
@@ -59,6 +60,18 @@ const CardContainerStyled = styled.div`
     font-weight: bold;
     font-size: 1.2rem;
   }
+  .linkToMovieDetails {
+    text-decoration: none;
+    color: #fff;
+  }
+  ${MoreInformations}:hover {
+    background-color: #e5e5e5;
+    border: 1px solid #1985a1;
+    .linkToMovieDetails {
+      color: #1985a1;
+      font-weight: bold;
+    }
+  }
 `;
 const CardContainer = ({
   src,
@@ -67,7 +80,10 @@ const CardContainer = ({
   duration,
   voteAverage,
   popularity,
+  id,
+  type,
 }) => {
+  console.log("type", type);
   return (
     <CardContainerStyled>
       <div className="imgContainer">
@@ -80,8 +96,10 @@ const CardContainer = ({
         <p>{popularity}</p>
       </div>
       <div className="overlay">
-        <MoreInformations className="MoreInformations">
-          Voir plus de details
+        <MoreInformations>
+          <Link to={`/${type}/${id}`} className="linkToMovieDetails">
+            Voir plus de details
+          </Link>
         </MoreInformations>
       </div>
     </CardContainerStyled>

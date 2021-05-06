@@ -25,6 +25,7 @@ export default function PopularMovies({ popularMovies }) {
             title={movie.title ? movie.title : movie.name}
             voteAverage={`Vote moyen: ${movie.vote_average}`}
             details={`${movie.overview}`}
+            id={movie.id}
           />
         );
       })}

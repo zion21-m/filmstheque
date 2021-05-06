@@ -37,6 +37,8 @@ const Series = () => {
           title={tvpopular.title ? tvpopular.title : tvpopular.name}
           popularity={`Popularité: ${tvpopular.popularity}`}
           details={`${tvpopular.overview}`}
+          id={tvpopular.id}
+          type="tv"
         />
       );
     });

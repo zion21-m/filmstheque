@@ -23,6 +23,7 @@ export default function Trending({ moviesTrending }) {
             src={poster + movie.poster_path}
             title={movie.title ? movie.title : movie.name}
             details={`${movie.overview}`}
+            id={movie.id}
           />
         );
       })}
