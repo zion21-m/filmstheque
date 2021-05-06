@@ -1,25 +1,13 @@
 import styled from "styled-components";
-const OverviewDiv = styled.div`
-  /* position: absolute;
-  bottom: 0;
-  max-width: 1200px;
-  transition: all 0.6s;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 0.5rem 0.2rem;
-  overflow: hidden;
-  opacity: 0;
-  font-size: 1rem;
-  width: 20vw;
-  color: white; */
-  /* white-space: nowrap; */
+const MoreInformations = styled.div`
+  background-color: #1985a1;
   color: white;
-  font-size: 20px;
-  position: absolute;
-  overflow: hidden;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 1rem 0.5rem;
+  border-radius: 8px;
+  text-align: center;
+  height: 100%;
 `;
 const CardContainerStyled = styled.div`
   position: relative;
@@ -29,49 +17,48 @@ const CardContainerStyled = styled.div`
   margin: 0.5rem;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid black;
   box-shadow: 4px 4px 20px black;
   .overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #008cba;
-    overflow: hidden;
-    width: 100%;
-    height: 0;
     transition: 0.5s ease;
-    font-size: 0.8rem !important;
+    opacity: 0;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+  }
+  &:hover .imgContainer img {
+    opacity: 0.3;
   }
   &:hover .overlay {
-    height: 100%;
+    opacity: 1;
   }
   .imgContainer {
     width: 20vw;
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
   }
   .imgContainer img {
-    width: 100%;
+    opacity: 1;
     display: block;
+    width: 100%;
+    height: auto;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
   }
   .movie-details {
     font-size: 1rem;
     text-align: center;
   }
   .movie-title {
-    /* color: #ffa106; */
-    /* color: #46494c; */
     color: #1985a1;
-    /* color: #3a6ea5; */
     font-weight: bold;
     font-size: 1.2rem;
   }
-
-  /* &:hover {
-    ${OverviewDiv} {
-      transform: translate(0, -20vh);
-      opacity: 1;
-    }
-  } */
 `;
 const CardContainer = ({
   src,
@@ -80,7 +67,6 @@ const CardContainer = ({
   duration,
   voteAverage,
   popularity,
-  details,
 }) => {
   return (
     <CardContainerStyled>
@@ -94,7 +80,9 @@ const CardContainer = ({
         <p>{popularity}</p>
       </div>
       <div className="overlay">
-        <OverviewDiv className="OverviewDiv">{details}</OverviewDiv>
+        <MoreInformations className="MoreInformations">
+          Voir plus de details
+        </MoreInformations>
       </div>
     </CardContainerStyled>
   );

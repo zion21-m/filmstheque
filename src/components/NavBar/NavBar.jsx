@@ -9,21 +9,17 @@ const NavBar = (props) => {
       <StyledNavigationBar>
         <ul>
           <li>
-            <NavLink
-              to="home"
-              className={`navbar-item`}
-              activeClassName="active"
-            >
+            <NavLink to="/" className={`navbar-item`} activeClassName="active">
               HOME
             </NavLink>
           </li>
           <li>
-            <NavLink to="movies" className={`navbar-item`}>
+            <NavLink to="/movies" className={`navbar-item`}>
               MOVIES
             </NavLink>
           </li>
           <li>
-            <NavLink to="series" className={`navbar-item`}>
+            <NavLink to="/series" className={`navbar-item`}>
               SERIES
             </NavLink>
           </li>

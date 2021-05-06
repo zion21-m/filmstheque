@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Trending from "../Trending/Trending";
 import styled from "styled-components";
 import PopularMovies from "../PopularMovies/PopularMovies";
+import WelcomePage from "../WelcomePage/WelcomePage";
 
 const HomeSectionTrending = styled.section`
   padding: 1rem;
@@ -49,6 +50,7 @@ const Home = () => {
   console.log("from home", popular);
   return (
     <>
+      <WelcomePage />
       <HomeSectionTrending>
         <h1>Trending</h1>
         <Trending moviesTrending={trend} />
