@@ -17,7 +17,9 @@ const WelcomePage = () => {
   console.log("movie welcome", upComingMovies);
   const arrayUpcomingMovies = [];
   for (let index in upComingMovies) {
-    arrayUpcomingMovies.push(upComingMovies[index]);
+    if (index < 4) {
+      arrayUpcomingMovies.push(upComingMovies[index]);
+    }
   }
   const poster = "https://image.tmdb.org/t/p/w1280";
 
