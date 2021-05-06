@@ -5,7 +5,7 @@ export const NavigationContainerStyled = styled.div`
 `;
 export const StyledNavigationBar = styled.div`
   background-color: #000000;
-  padding-right: 5vw;
+  padding-right: 2rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -13,16 +13,18 @@ export const StyledNavigationBar = styled.div`
   li {
     display: inline-block;
     list-style: none;
-    padding: 0.5rem;
+    padding: 0.8rem;
   }
   .navbar-item {
     text-decoration: none;
     color: #fff;
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
   .active {
     color: #ffa106;
-    border-bottom: 1px solid #ffa106;
+    /* font-weight: bold; */
+    border-bottom: 2px solid #ffa106;
+    padding-bottom: 0.5rem;
   }
   .navbar-item:hover {
     color: #ffa106;

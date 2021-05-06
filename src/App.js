@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router";
 import Home from "./components/Home/Home";
+import MovieDetails from "./components/MovieDetails/MovieDetails";
 import Movies from "./components/Movies/Movies";
 import NavBar from "./components/NavBar/NavBar";
 import Search from "./components/Search/Search";
@@ -43,13 +44,14 @@ const App = () => {
       <NavBar onChange={handleSearch} onClick={handleClick} />
       <Switch>
         {/* <Route exact path="/" component={WelcomePage} /> */}
-        <Route exact path="/" component={Home} />
+        <Route exact path="/home" component={Home} />
         <Route path="/movies" component={Movies} />
         <Route path="/series" component={Series} />
         <Route
           path="/search"
           render={() => <Search resultDataSearch={dataSearch} />}
         />
+        <Route path="/movie/:id" render={({ match }) => <MovieDetails />} />
       </Switch>
     </>
   );

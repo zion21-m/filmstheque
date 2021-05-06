@@ -9,7 +9,7 @@ const NavBar = (props) => {
       <StyledNavigationBar>
         <ul>
           <li>
-            <NavLink to="/" className={`navbar-item`} activeClassName="active">
+            <NavLink to="/home" className={`navbar-item`}>
               HOME
             </NavLink>
           </li>

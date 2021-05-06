@@ -5,18 +5,16 @@ import styled from "styled-components";
 const WelcomePageStyled = styled.section`
   width: 100%;
   height: auto;
-  padding: 0.1rem 0rem;
-  /* background: rgba(0, 0, 0, 0.9); */
+  padding-top: 0rem;
+  padding-bottom: 5rem;
   background-color: #353535;
   .movie-container {
     width: 100vw;
     position: relative;
   }
   .welcome-image {
-    /* width: 100%;
-    height: 80vh; */
     width: 100%;
-    height: 90vh;
+    height: 82vh;
     opacity: 0.6;
     filter: grayscale(40%);
   }
@@ -25,7 +23,6 @@ const WelcomePageStyled = styled.section`
     bottom: 50px;
     left: 16px;
     font-size: 18px;
-    /* transform: translate(-30%, -50%); */
     color: #e5e5e5;
     font-size: 2rem;
   }
@@ -35,6 +32,12 @@ const WelcomePageStyled = styled.section`
   .movie-name {
     color: #ffa106;
     font-weight: bold;
+  }
+  .rec.rec-arrow {
+    background-color: rgba(0, 0, 0, 1);
+  }
+  .rec.rec-dot {
+    background-color: rgba(255, 255, 255, 1);
   }
 `;
 
