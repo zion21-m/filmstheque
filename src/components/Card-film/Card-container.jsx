@@ -1,6 +1,6 @@
 import styled from "styled-components";
-const OverviewDiv = styled.p`
-  position: absolute;
+const OverviewDiv = styled.div`
+  /* position: absolute;
   bottom: 0;
   max-width: 1200px;
   transition: all 0.6s;
@@ -10,7 +10,16 @@ const OverviewDiv = styled.p`
   opacity: 0;
   font-size: 1rem;
   width: 20vw;
+  color: white; */
+  /* white-space: nowrap; */
   color: white;
+  font-size: 20px;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 `;
 const CardContainerStyled = styled.div`
   position: relative;
@@ -22,11 +31,27 @@ const CardContainerStyled = styled.div`
   overflow: hidden;
   border: 1px solid black;
   box-shadow: 4px 4px 20px black;
+  .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #008cba;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: 0.5s ease;
+    font-size: 0.8rem !important;
+  }
+  &:hover .overlay {
+    height: 100%;
+  }
   .imgContainer {
     width: 20vw;
   }
   .imgContainer img {
     width: 100%;
+    display: block;
   }
   .movie-details {
     font-size: 1rem;
@@ -41,12 +66,12 @@ const CardContainerStyled = styled.div`
     font-size: 1.2rem;
   }
 
-  &:hover {
+  /* &:hover {
     ${OverviewDiv} {
       transform: translate(0, -20vh);
       opacity: 1;
     }
-  }
+  } */
 `;
 const CardContainer = ({
   src,
@@ -68,7 +93,9 @@ const CardContainer = ({
         <p>{voteAverage}</p>
         <p>{popularity}</p>
       </div>
-      <OverviewDiv className="OverviewDiv">{details}</OverviewDiv>
+      <div className="overlay">
+        <OverviewDiv className="OverviewDiv">{details}</OverviewDiv>
+      </div>
     </CardContainerStyled>
   );
 };
