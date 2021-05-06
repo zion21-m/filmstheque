@@ -47,7 +47,7 @@ const Home = () => {
         setPopular(popular.results);
       });
   }, []);
-  console.log("from home", popular);
+
   return (
     <>
       <WelcomePage />

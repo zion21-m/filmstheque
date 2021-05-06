@@ -24,6 +24,7 @@ export default function Trending({ moviesTrending }) {
             title={movie.title ? movie.title : movie.name}
             details={`${movie.overview}`}
             id={movie.id}
+            type="movie"
           />
         );
       })}

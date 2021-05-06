@@ -32,7 +32,6 @@ const Movies = () => {
         setMovieByPopularity(movies.results);
       });
   }, []);
-  console.log("movies", movieByPopularity);
 
   const poster = "https://image.tmdb.org/t/p/w1280";
 
@@ -40,7 +39,6 @@ const Movies = () => {
   for (let index in movieByPopularity) {
     arrayMoviesByPopularity.push(movieByPopularity[index]);
   }
-  console.log("array", arrayMoviesByPopularity);
 
   const renderMoviesByPopularity = () => {
     return arrayMoviesByPopularity.map((movie) => {

@@ -15,6 +15,10 @@ const MovieImage = styled.img`
 const TitleStyled = styled.h1`
   margin-left: 1rem;
 `;
+const MovieRightSide = styled.div`
+  font-size: 1rem;
+`;
+
 const MovieDetails = (props) => {
   const [movieDetails, setMovieDetails] = useState();
   const urlSegment = props.match.url;
@@ -35,6 +39,11 @@ const MovieDetails = (props) => {
   const poster = "https://image.tmdb.org/t/p/w1280";
 
   if (movieDetails) {
+    const movieGenre = () => {
+      return movieDetails.genres.map((genre) => {
+        return <di>{genre.name} &nbsp;</di>;
+      });
+    };
     return (
       <>
         <TitleStyled>{movieDetails.title}</TitleStyled>
@@ -49,9 +58,16 @@ const MovieDetails = (props) => {
               alt={movieDetails.title}
             />
           </MovieDetailsLeftSide>
-          <div>
+          <MovieRightSide>
             <div>{movieDetails.overview}</div>
-          </div>
+            <div>Vote average : {movieDetails.vote_average}</div>
+            <div>Vote count : {movieDetails.vote_count}</div>
+            {movieGenre()}
+            <div>
+              Site internet : &nbsp;
+              <a href={movieDetails.homepage}>{movieDetails.homepage}</a>
+            </div>
+          </MovieRightSide>
         </MovieDetailStyled>
       </>
     );

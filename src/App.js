@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch, Redirect } from "react-router";
+import { Route, Switch } from "react-router";
 import Home from "./components/Home/Home";
 import MovieDetails from "./components/MovieDetails/MovieDetails";
 import Movies from "./components/Movies/Movies";
