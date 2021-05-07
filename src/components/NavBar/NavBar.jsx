@@ -10,12 +10,12 @@ const NavBar = (props) => {
         <ul>
           <li>
             <NavLink to="/home" className={`navbar-item`}>
-              HOME
+              ACCUEIL
             </NavLink>
           </li>
           <li>
             <NavLink to="/movies" className={`navbar-item`}>
-              MOVIES
+              FILMS
             </NavLink>
           </li>
           <li>

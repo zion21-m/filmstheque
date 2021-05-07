@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import CardContainer from "../Card-film/Card-container";
 import styled from "styled-components";
+import Loader from "../Loader/Loader";
 
 const MovieSection = styled.section`
   padding: 1rem;
@@ -34,37 +35,39 @@ const Movies = () => {
   }, []);
 
   const poster = "https://image.tmdb.org/t/p/w1280";
-
   const arrayMoviesByPopularity = [];
   for (let index in movieByPopularity) {
     arrayMoviesByPopularity.push(movieByPopularity[index]);
   }
 
-  const renderMoviesByPopularity = () => {
-    return arrayMoviesByPopularity.map((movie) => {
-      return (
-        <CardContainer
-          src={poster + movie.poster_path}
-          title={movie.title ? movie.title : movie.name}
-          popularity={`Popularité: ${movie.popularity}`}
-          details={`${movie.overview}`}
-          id={movie.id}
-          type="movie"
-        />
-      );
-    });
-  };
-
-  return (
-    <MovieSection>
-      <h1>Trouve ton film</h1>
-      <p className="moviesPresentationText">
-        Nos films sont présentés par popularité, en fonction des avis des autres
-        utilisateurs, afin de vous présenter le meilleur.
-      </p>
-      <div className="moviesContainer">{renderMoviesByPopularity()}</div>
-    </MovieSection>
-  );
+  if (!movieByPopularity) {
+    return <Loader />;
+  } else {
+    const renderMoviesByPopularity = () => {
+      return arrayMoviesByPopularity.map((movie) => {
+        return (
+          <CardContainer
+            src={poster + movie.poster_path}
+            title={movie.title ? movie.title : movie.name}
+            popularity={`Popularité: ${movie.popularity}`}
+            details={`${movie.overview}`}
+            id={movie.id}
+            type="movie"
+          />
+        );
+      });
+    };
+    return (
+      <MovieSection>
+        <h1>Trouve ton film</h1>
+        <p className="moviesPresentationText">
+          Nos films sont présentés par popularité, en fonction des avis des
+          autres utilisateurs, afin de vous présenter le meilleur.
+        </p>
+        <div className="moviesContainer">{renderMoviesByPopularity()}</div>
+      </MovieSection>
+    );
+  }
 };
 
 export default Movies;

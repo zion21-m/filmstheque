@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import CardContainer from "../Card-film/Card-container";
+import Loader from "../Loader/Loader";
 
 const Recommandation = ({ urlSegment }) => {
   const [recommandations, setRecommandations] = useState();
@@ -20,7 +21,7 @@ const Recommandation = ({ urlSegment }) => {
 
   if (!recommandations) {
     return (
-      <div>Patientez...</div>
+      <Loader />
 
       // const movieGenre = () => {
       //   return recommandations.genres.map((genre) => {
