@@ -3,6 +3,7 @@ import Trending from "../Trending/Trending";
 import styled from "styled-components";
 import PopularMovies from "../PopularMovies/PopularMovies";
 import WelcomePage from "../WelcomePage/WelcomePage";
+import HomeFirstSection from "../HomeFirstSection/HomeFirstSection";
 
 const HomeSectionTrending = styled.section`
   padding: 1rem;
@@ -50,6 +51,7 @@ const Home = () => {
 
   return (
     <>
+      {/* <HomeFirstSection /> */}
       <WelcomePage />
       <HomeSectionTrending>
         <h1>Trending</h1>

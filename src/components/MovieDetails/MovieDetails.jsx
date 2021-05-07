@@ -25,11 +25,11 @@ const MovieDetailStyled = styled.div`
 `;
 const MovieDetailsLeftSide = styled.div`
   width: 30vw;
-  padding: 0rem 1rem;
+  padding: 1.5rem 1rem;
 `;
 const MovieImage = styled.img`
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
 `;
 const TitleStyled = styled.h1`
   font-size: 2.5rem;
@@ -46,6 +46,15 @@ const MovieRightSide = styled.div`
   .synosis {
     font-size: 1.4rem;
     font-weight: bold;
+  }
+`;
+const RecommandationSection = styled.section`
+  background-color: #e5e5e5;
+  padding: 4rem 1rem;
+  h1 {
+    font-size: 2rem;
+    margin-left: 3.5rem;
+    margin-bottom: 2rem;
   }
 `;
 const RecommandationStyled = styled.div`
@@ -95,27 +104,33 @@ const MovieDetails = (props) => {
           </MovieDetailsLeftSide>
           <MovieRightSide>
             <TitleStyled>
-              {movieDetails.title}
+              {movieDetails.title ? movieDetails.title : movieDetails.name}
               <span className="releaseDate">
-                &nbsp;({movieDetails.release_date})
+                &nbsp;(
+                {movieDetails.release_date
+                  ? movieDetails.release_date
+                  : movieDetails.first_air_date}
+                )
               </span>
             </TitleStyled>
             <p className="synosis">Synopsis</p>
             <p>{movieDetails.overview}</p>
             {movieGenre()}
 
-            <p>Vote average : {movieDetails.vote_average}</p>
-            <p>Vote count : {movieDetails.vote_count}</p>
+            <p>Moyenne de votes : {movieDetails.vote_average}</p>
+            <p>Nombre de votes : {movieDetails.vote_count}</p>
             <div>
               Site internet : &nbsp;
               <a href={movieDetails.homepage}>{movieDetails.homepage}</a>
             </div>
           </MovieRightSide>
         </MovieDetailStyled>
-        <h1>Recommendations</h1>
-        <RecommandationStyled>
-          <Recommandation urlSegment={urlSegment} />
-        </RecommandationStyled>
+        <RecommandationSection>
+          <h1>Recommandations</h1>
+          <RecommandationStyled>
+            <Recommandation urlSegment={urlSegment} />
+          </RecommandationStyled>
+        </RecommandationSection>
       </>
     );
   } else {

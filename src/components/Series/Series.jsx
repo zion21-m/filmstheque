@@ -12,7 +12,7 @@ const Series = () => {
   const [tvPopular, setTvPopular] = useState();
   useEffect(function () {
     fetch(
-      "https://api.themoviedb.org/3/tv/popular?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=en-US&page=1"
+      "https://api.themoviedb.org/3/tv/popular?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=FR&page=1"
     )
       .then(function (result) {
         return result.json();

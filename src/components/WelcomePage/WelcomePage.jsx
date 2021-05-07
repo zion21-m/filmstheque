@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Carousel from "react-elastic-carousel";
 import styled from "styled-components";
+import Carousel from "react-bootstrap/Carousel";
 
 const WelcomePageStyled = styled.section`
   width: 100%;
@@ -64,37 +64,32 @@ const WelcomePage = () => {
   const poster = "https://image.tmdb.org/t/p/w1280";
 
   const renderUpComingMovies = () => {
-    return arrayUpcomingMovies.map((upComingMovie) => {
-      return (
-        <div className="movie-container">
-          <img
-            src={poster + upComingMovie.backdrop_path}
-            alt={upComingMovie.title}
-            className="welcome-image"
-          />
-          <div className="movie-information">
-            <div className="movie-title">
-              Titre :{" "}
-              <span className="movie-name">
-                {upComingMovie.title
-                  ? upComingMovie.title
-                  : upComingMovie.original_title}
-              </span>
-            </div>
-            <div className="movie-out">
-              Date de sortie: {upComingMovie.release_date}
-            </div>
-          </div>
-        </div>
-      );
-    });
+    return (
+      <Carousel>
+        {arrayUpcomingMovies.map((upComingMovie) => {
+          return (
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={poster + upComingMovie.backdrop_path}
+                alt="First slide"
+              />
+              <Carousel.Caption>
+                <h3>
+                  {upComingMovie.title
+                    ? upComingMovie.title
+                    : upComingMovie.original_title}
+                </h3>
+                <p>{upComingMovie.release_date}</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          );
+        })}
+      </Carousel>
+    );
   };
 
-  return (
-    <WelcomePageStyled>
-      <Carousel itemsToShow={1}>{renderUpComingMovies()}</Carousel>
-    </WelcomePageStyled>
-  );
+  return <WelcomePageStyled>{renderUpComingMovies()}</WelcomePageStyled>;
 };
 
 export default WelcomePage;
