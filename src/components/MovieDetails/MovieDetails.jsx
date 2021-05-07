@@ -29,14 +29,24 @@ const MovieDetailsLeftSide = styled.div`
 `;
 const MovieImage = styled.img`
   width: 100%;
+  object-fit: cover;
 `;
 const TitleStyled = styled.h1`
   font-size: 2.5rem;
   font-size: bold;
+  .releaseDate {
+    font-weight: 400;
+  }
 `;
 const MovieRightSide = styled.div`
-  font-size: 1rem;
-  padding: 1.5rem 0.2rem;
+  width: 70vw;
+  font-size: 1.2rem;
+  padding: 1.5rem 1rem;
+  text-align: justify;
+  .synosis {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
 `;
 const RecommandationStyled = styled.div`
   display: flex;
@@ -47,7 +57,7 @@ const RecommandationStyled = styled.div`
 const MovieDetails = (props) => {
   const [movieDetails, setMovieDetails] = useState();
   const urlSegment = props.match.url;
-  const url = `https://api.themoviedb.org/3${urlSegment}?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=en-US`;
+  const url = `https://api.themoviedb.org/3${urlSegment}?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=FR`;
 
   useEffect(
     function () {
@@ -62,6 +72,7 @@ const MovieDetails = (props) => {
     [url]
   );
   const poster = "https://image.tmdb.org/t/p/w1280";
+  console.log("movieDetails", movieDetails);
 
   if (movieDetails) {
     const movieGenre = () => {
@@ -83,12 +94,18 @@ const MovieDetails = (props) => {
             />
           </MovieDetailsLeftSide>
           <MovieRightSide>
-            <TitleStyled>{movieDetails.title}</TitleStyled>
-            <p>Synopsis</p>
-            <div>{movieDetails.overview}</div>
-            <div>Vote average : {movieDetails.vote_average}</div>
-            <div>Vote count : {movieDetails.vote_count}</div>
+            <TitleStyled>
+              {movieDetails.title}
+              <span className="releaseDate">
+                &nbsp;({movieDetails.release_date})
+              </span>
+            </TitleStyled>
+            <p className="synosis">Synopsis</p>
+            <p>{movieDetails.overview}</p>
             {movieGenre()}
+
+            <p>Vote average : {movieDetails.vote_average}</p>
+            <p>Vote count : {movieDetails.vote_count}</p>
             <div>
               Site internet : &nbsp;
               <a href={movieDetails.homepage}>{movieDetails.homepage}</a>
