@@ -15,6 +15,7 @@ export default function Trending({ moviesTrending }) {
   for (let i in moviesTrending) {
     arra.push(moviesTrending[i]);
   }
+  console.log("trending", moviesTrending);
   return (
     <TrendingMovies>
       {arra.map((movie) => {
@@ -24,7 +25,7 @@ export default function Trending({ moviesTrending }) {
             title={movie.title ? movie.title : movie.name}
             details={`${movie.overview}`}
             id={movie.id}
-            type="movie"
+            type={movie.media_type}
           />
         );
       })}

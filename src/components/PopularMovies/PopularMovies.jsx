@@ -16,6 +16,7 @@ export default function PopularMovies({ popularMovies }) {
   for (let i in popularMovies) {
     PopularMoviesArray.push(popularMovies[i]);
   }
+  console.log("popular", popularMovies);
   return (
     <PopularMovieStyled>
       {PopularMoviesArray.map((movie) => {

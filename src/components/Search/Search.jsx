@@ -27,7 +27,7 @@ const Search = ({ resultDataSearch }) => {
   };
   return (
     <>
-      <h1>Je suis la section search</h1>
+      <h1>Voici les resultats de la recherche</h1>
       <SearchStyled>{renderSearch()}</SearchStyled>
     </>
   );

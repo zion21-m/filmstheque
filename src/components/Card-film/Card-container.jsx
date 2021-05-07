@@ -76,6 +76,7 @@ const CardContainerStyled = styled.div`
 const CardContainer = ({
   src,
   alt,
+  genre,
   title,
   duration,
   voteAverage,
@@ -94,6 +95,7 @@ const CardContainer = ({
         <p>{duration}</p>
         <p>{voteAverage}</p>
         <p>{popularity}</p>
+        <div>{genre}</div>
       </div>
       <div className="overlay">
         <MoreInformations>

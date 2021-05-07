@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import Recommandation from "../Recommandations/Recommandation";
 
 const MovieDetailStyled = styled.div`
   display: flex;
@@ -18,11 +19,16 @@ const TitleStyled = styled.h1`
 const MovieRightSide = styled.div`
   font-size: 1rem;
 `;
+const RecommandationStyled = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
 
 const MovieDetails = (props) => {
   const [movieDetails, setMovieDetails] = useState();
   const urlSegment = props.match.url;
-  const url = `https://api.themoviedb.org/3/${urlSegment}?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=en-US`;
+  const url = `https://api.themoviedb.org/3${urlSegment}?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=en-US`;
 
   useEffect(
     function () {
@@ -41,7 +47,7 @@ const MovieDetails = (props) => {
   if (movieDetails) {
     const movieGenre = () => {
       return movieDetails.genres.map((genre) => {
-        return <di>{genre.name} &nbsp;</di>;
+        return <div>{genre.name} &nbsp;</div>;
       });
     };
     return (
@@ -69,6 +75,10 @@ const MovieDetails = (props) => {
             </div>
           </MovieRightSide>
         </MovieDetailStyled>
+        <h1>Recommendations</h1>
+        <RecommandationStyled>
+          <Recommandation urlSegment={urlSegment} />
+        </RecommandationStyled>
       </>
     );
   } else {

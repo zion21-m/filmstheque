@@ -22,7 +22,7 @@ const Series = () => {
         setTvPopular(tvSeries.results);
       });
   }, []);
-
+  console.log("tvpopular", tvPopular);
   const poster = "https://image.tmdb.org/t/p/w1280";
 
   const renderTvPopular = () => {
