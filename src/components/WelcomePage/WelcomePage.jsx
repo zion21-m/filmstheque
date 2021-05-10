@@ -5,29 +5,27 @@ import Carousel from "react-bootstrap/Carousel";
 const WelcomePageStyled = styled.section`
   width: 100%;
   height: auto;
-  padding-top: 0rem;
-  padding-bottom: 5rem;
   background-color: #353535;
   .movie-container {
-    width: 100vw;
+    /* width: 100vw; */
     position: relative;
   }
   .welcome-image {
-    width: 100%;
-    height: 82vh;
     opacity: 0.6;
     filter: grayscale(40%);
   }
   .movie-information {
     position: absolute;
-    bottom: 50px;
-    left: 16px;
+    bottom: 150px;
+    left: -300px;
     font-size: 18px;
     color: #e5e5e5;
     font-size: 2rem;
   }
   .movie-title {
     font-size: 4rem;
+    color: #ffa106;
+    font-weight: bold;
   }
   .movie-name {
     color: #ffa106;
@@ -65,22 +63,24 @@ const WelcomePage = () => {
 
   const renderUpComingMovies = () => {
     return (
-      <Carousel interval={2000} pause={false}>
+      <Carousel interval={2000} pause={false} className="movie-container">
         {arrayUpcomingMovies.map((upComingMovie) => {
           return (
             <Carousel.Item>
               <img
-                className="d-block w-100"
+                className="d-block w-100 welcome-image "
                 src={poster + upComingMovie.backdrop_path}
                 alt="First slide"
               />
-              <Carousel.Caption>
-                <h3>
+              <Carousel.Caption className="movie-information">
+                {/* <div className="movie-information"> */}
+                <h3 className="movie-title">
                   {upComingMovie.title
                     ? upComingMovie.title
                     : upComingMovie.original_title}
                 </h3>
-                <p>{upComingMovie.release_date}</p>
+                <p>Date de sortie: {upComingMovie.release_date}</p>
+                {/* </div> */}
               </Carousel.Caption>
             </Carousel.Item>
           );

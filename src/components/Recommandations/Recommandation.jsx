@@ -5,18 +5,21 @@ import Loader from "../Loader/Loader";
 const Recommandation = ({ urlSegment }) => {
   const [recommandations, setRecommandations] = useState();
 
-  useEffect(function () {
-    fetch(
-      `https://api.themoviedb.org/3${urlSegment}/recommendations?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=en-US&page=1`
-    )
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        const recommendationsData = data;
-        setRecommandations(recommendationsData.results);
-      });
-  }, []);
+  useEffect(
+    function () {
+      fetch(
+        `https://api.themoviedb.org/3${urlSegment}/recommendations?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=en-US&page=1`
+      )
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          const recommendationsData = data;
+          setRecommandations(recommendationsData.results);
+        });
+    },
+    [urlSegment]
+  );
   const poster = "https://image.tmdb.org/t/p/w1280";
 
   if (!recommandations) {
