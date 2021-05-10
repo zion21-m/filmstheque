@@ -43,13 +43,12 @@ const App = () => {
     <>
       <NavBar onChange={handleSearch} onClick={handleClick} />
       <Switch>
-        {/* <Route exact path="/" component={WelcomePage} /> */}
         <Route exact path="/home" component={Home} />
         <Route path="/movies" component={Movies} />
         <Route path="/series" component={Series} />
         <Route
           path="/search"
-          render={() => <Search resultDataSearch={dataSearch} />}
+          render={() => <Search dataSearchResult={dataSearch} />}
         />
         <Route
           path="/movie/:id"

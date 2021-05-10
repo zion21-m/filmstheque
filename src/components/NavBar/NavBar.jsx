@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import Input from "../Input/Input";
 import { NavigationContainerStyled, StyledNavigationBar } from "./NavBarStyle";
-// import { useState } from "react";
 
 const NavBar = (props) => {
   return (

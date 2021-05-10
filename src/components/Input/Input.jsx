@@ -11,6 +11,7 @@ const StyledSearch = styled.span`
   border: 1px solid #0564ff;
   background-color: #0564ff;
   padding: 0.7rem;
+  padding-top: 0.85rem;
   color: white;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -35,11 +36,11 @@ const Input = ({ placeholder, type, className, onChange, onClick }) => {
         className={className}
         onChange={onChange}
       />
-      <Link to="/search" className="searchLink">
-        <StyledSearch className="search" onClick={onClick}>
+      <StyledSearch className="search" onClick={onClick}>
+        <Link to="/search" className="searchLink">
           Search
-        </StyledSearch>
-      </Link>
+        </Link>
+      </StyledSearch>
     </InputField>
   );
 };

@@ -65,8 +65,9 @@ const RecommandationStyled = styled.div`
 
 const MovieDetails = (props) => {
   const [movieDetails, setMovieDetails] = useState();
+  console.log("props match", props.match);
   const urlSegment = props.match.url;
-  const url = `https://api.themoviedb.org/3${urlSegment}?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=FR`;
+  const url = `https://api.themoviedb.org/3${urlSegment}?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=fr`;
 
   useEffect(
     function () {
@@ -117,11 +118,15 @@ const MovieDetails = (props) => {
             <p>{movieDetails.overview}</p>
             {movieGenre()}
 
-            <p>Moyenne de votes : {movieDetails.vote_average}</p>
+            <p>Recommandé à {movieDetails.vote_average * 10} %</p>
             <p>Nombre de votes : {movieDetails.vote_count}</p>
             <div>
               Site internet : &nbsp;
-              <a href={movieDetails.homepage}>{movieDetails.homepage}</a>
+              {movieDetails.homepage ? (
+                <a href={movieDetails.homepage}>{movieDetails.homepage}</a>
+              ) : (
+                "information non disponible"
+              )}
             </div>
           </MovieRightSide>
         </MovieDetailStyled>

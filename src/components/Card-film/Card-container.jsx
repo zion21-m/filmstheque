@@ -81,7 +81,6 @@ const CardContainer = ({
   id,
   type,
 }) => {
-  console.log("type", type);
   return (
     <CardContainerStyled>
       <div className="imgContainer">

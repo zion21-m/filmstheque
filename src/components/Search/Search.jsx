@@ -8,14 +8,13 @@ const SearchStyled = styled.div`
   justify-content: center;
 `;
 
-const Search = ({ resultDataSearch }) => {
-  console.log("datasearch", resultDataSearch);
+const Search = ({ dataSearchResult }) => {
   const arrayResearch = [];
   const poster = "https://image.tmdb.org/t/p/w1280";
-  for (let index in resultDataSearch) {
-    arrayResearch.push(resultDataSearch[index]);
+  for (let index in dataSearchResult) {
+    arrayResearch.push(dataSearchResult[index]);
   }
-  if (!resultDataSearch) {
+  if (!dataSearchResult) {
     return <Loader />;
   } else {
     const renderSearch = () => {

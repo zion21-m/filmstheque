@@ -12,11 +12,11 @@ const PopularMovieStyled = styled.div`
 `;
 
 export default function PopularMovies({ popularMovies }) {
+  console.log("popularMovies", popularMovies);
   let PopularMoviesArray = [];
   for (let i in popularMovies) {
     PopularMoviesArray.push(popularMovies[i]);
   }
-  console.log("popular", popularMovies);
   return (
     <PopularMovieStyled>
       {PopularMoviesArray.map((movie) => {
