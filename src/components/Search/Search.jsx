@@ -33,8 +33,9 @@ const Search = ({ dataSearchResult }) => {
     };
     return (
       <>
-        <h1>Voici les resultats de la recherche</h1>
+        <h1>Voici les resultats des films correspondant à votre recherche</h1>
         <SearchStyled>{renderSearch()}</SearchStyled>
+        <h2>Voici les resultats des series correspondant à votre recherche</h2>
       </>
     );
   }

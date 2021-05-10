@@ -64,6 +64,9 @@ const CardContainerStyled = styled.div`
     text-decoration: none;
     /* color: #fff; */
   }
+  .voteAverage {
+    color: green;
+  }
   ${MoreInformations}:hover {
     background-color: #e5e5e5;
     border: 1px solid #1985a1;
@@ -89,7 +92,7 @@ const CardContainer = ({
       <div className="movie-details">
         <p className="movie-title">{title}</p>
         <p>{duration}</p>
-        <p>{voteAverage}</p>
+        <p className="voteAverage">{voteAverage}</p>
         <p>{popularity}</p>
         <div>{genre}</div>
       </div>
