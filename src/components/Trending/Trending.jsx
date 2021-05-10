@@ -11,14 +11,15 @@ const TrendingMovies = styled.div`
 `;
 
 export default function Trending({ moviesTrending }) {
-  let arra = [];
-  for (let i in moviesTrending) {
-    arra.push(moviesTrending[i]);
+  let moviesTrendingArray = [];
+  for (let index in moviesTrending) {
+    if (index < 8) {
+      moviesTrendingArray.push(moviesTrending[index]);
+    }
   }
-  console.log("trending", moviesTrending);
   return (
     <TrendingMovies>
-      {arra.map((movie) => {
+      {moviesTrendingArray.map((movie) => {
         return (
           <CardContainer
             src={poster + movie.poster_path}

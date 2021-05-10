@@ -4,20 +4,21 @@ import styled from "styled-components";
 import PopularMovies from "../PopularMovies/PopularMovies";
 import WelcomePage from "../WelcomePage/WelcomePage";
 
-const HomeSectionTrending = styled.section`
-  padding: 1rem;
+const HomeTrendingSection = styled.section`
+  padding: 4rem 1rem;
   background: #e5e5e5;
   h1 {
-    font-size: 1.4rem;
-    margin-left: 2rem;
+    font-size: 2rem;
+    margin-left: 5rem;
   }
 `;
 const HomePopularSection = styled.section`
-  padding: 1rem;
-  background: #e5e5e5;
+  padding: 4rem 1rem;
+  background: #191919;
   h1 {
-    font-size: 1.4rem;
-    margin-left: 2rem;
+    font-size: 2rem;
+    margin-left: 5rem;
+    color: #fff;
   }
 `;
 
@@ -51,10 +52,10 @@ const Home = () => {
   return (
     <>
       <WelcomePage />
-      <HomeSectionTrending>
-        <h1>Trending</h1>
+      <HomeTrendingSection>
+        <h1>A la une</h1>
         <Trending moviesTrending={trend} />
-      </HomeSectionTrending>
+      </HomeTrendingSection>
       <HomePopularSection>
         <h1>Populaire</h1>
         <PopularMovies popularMovies={popular} />

@@ -16,7 +16,7 @@ const WelcomePageStyled = styled.section`
   }
   .movie-information {
     position: absolute;
-    bottom: 150px;
+    bottom: 200px;
     left: -300px;
     font-size: 18px;
     color: #e5e5e5;
