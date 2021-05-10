@@ -62,15 +62,12 @@ const CardContainerStyled = styled.div`
   }
   .linkToMovieDetails {
     text-decoration: none;
-    color: #fff;
+    /* color: #fff; */
   }
   ${MoreInformations}:hover {
     background-color: #e5e5e5;
     border: 1px solid #1985a1;
-    .linkToMovieDetails {
-      color: #1985a1;
-      font-weight: bold;
-    }
+    color: #1985a1;
   }
 `;
 const CardContainer = ({
@@ -98,11 +95,9 @@ const CardContainer = ({
         <div>{genre}</div>
       </div>
       <div className="overlay">
-        <MoreInformations>
-          <Link to={`/${type}/${id}`} className="linkToMovieDetails">
-            Voir plus de details
-          </Link>
-        </MoreInformations>
+        <Link to={`/${type}/${id}`} className="linkToMovieDetails">
+          <MoreInformations>Voir plus de details</MoreInformations>
+        </Link>
       </div>
     </CardContainerStyled>
   );

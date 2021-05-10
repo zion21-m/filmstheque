@@ -9,6 +9,7 @@ const SearchStyled = styled.div`
 `;
 
 const Search = ({ resultDataSearch }) => {
+  console.log("datasearch", resultDataSearch);
   const arrayResearch = [];
   const poster = "https://image.tmdb.org/t/p/w1280";
   for (let index in resultDataSearch) {
@@ -25,6 +26,8 @@ const Search = ({ resultDataSearch }) => {
             title={movie.title ? movie.title : movie.name}
             popularity={`Popularité: ${movie.popularity}`}
             details={`${movie.overview}`}
+            id={movie.id}
+            type="movie"
           />
         );
       });

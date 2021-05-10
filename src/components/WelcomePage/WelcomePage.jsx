@@ -65,7 +65,7 @@ const WelcomePage = () => {
 
   const renderUpComingMovies = () => {
     return (
-      <Carousel>
+      <Carousel interval={2000} pause={false}>
         {arrayUpcomingMovies.map((upComingMovie) => {
           return (
             <Carousel.Item>
