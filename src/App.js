@@ -11,8 +11,11 @@ import "./index.css";
 
 const App = () => {
   const [search, setSearch] = useState();
+  const [word, setWord] = useState();
   const [fetchLink, setFetchLink] = useState();
+  const [tvFetchLink, setTvFetchLink] = useState();
   const [dataSearch, setDataSearch] = useState();
+  const [tvDataSearch, setTvDataSearch] = useState();
   const handleSearch = (e) => {
     e.preventDefault();
     setSearch(e.target.value);
@@ -21,8 +24,13 @@ const App = () => {
     e.preventDefault();
     const searchApiLink =
       "https://api.themoviedb.org/3/search/movie?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&query=";
+    const searchTvApiLink =
+      "https://api.themoviedb.org/3/search/tv?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&query=";
     let linkToFetch = searchApiLink + search;
+    let tvLinkFetch = searchTvApiLink + search;
     setFetchLink(linkToFetch);
+    setTvFetchLink(tvLinkFetch);
+    setWord(search);
   };
   console.log("fetchLink", fetchLink);
   useEffect(
@@ -38,6 +46,20 @@ const App = () => {
     },
     [fetchLink]
   );
+  useEffect(
+    function () {
+      fetch(tvFetchLink)
+        .then(function (result) {
+          return result.json();
+        })
+        .then(function (data) {
+          const searchedTvData = data;
+          setTvDataSearch(searchedTvData.results);
+        });
+    },
+    [tvFetchLink]
+  );
+
   console.log("searchdata", dataSearch);
   return (
     <>
@@ -48,7 +70,13 @@ const App = () => {
         <Route path="/series" component={Series} />
         <Route
           path="/search"
-          render={() => <Search dataSearchResult={dataSearch} />}
+          render={() => (
+            <Search
+              dataSearchResult={dataSearch}
+              searchedWord={word}
+              tvDataSearched={tvDataSearch}
+            />
+          )}
         />
         <Route
           path="/movie/:id"
