@@ -14,7 +14,7 @@ const MoreInformations = styled.div`
 `;
 const CardContainerStyled = styled.div`
   position: relative;
-  width: 20vw;
+  max-width: 250px;
   background-color: #fff;
   padding: 0.5rem;
   margin: 0.5rem;

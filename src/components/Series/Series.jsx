@@ -12,15 +12,27 @@ const PopularTvStyled = styled.section`
 const StyledPagination = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
+  margin: 0 auto;
   align-content: center;
   margin-top: 0.5rem;
+  width: 80%;
 `;
 
 const Series = () => {
   const [tvPopular, setTvPopular] = useState();
   const [totalPages, setTotalPages] = useState(1);
   const [pageNumber, setPageNumber] = useState();
+
+  let size = "lg";
+  if (window.screen.width < 700) {
+    size = "md";
+  }
+  let width = Math.ceil(window.screen.width / 200);
+  if (width < 3) {
+    width = 2;
+  }
 
   useEffect(
     function () {
@@ -42,8 +54,8 @@ const Series = () => {
   let paginationConfig = {
     totalPages: totalPages,
     currentPage: pageNumber,
-    showMax: 10,
-    size: "lg",
+    showMax: width,
+    size: size,
     threeDots: true,
     prevNext: true,
     href: "/movies?page=*", // * will be replaced by the page number

@@ -1,6 +1,7 @@
 import CardContainer from "../Card-film/Card-container";
 import styled from "styled-components";
 import Loader from "../Loader/Loader";
+import NotAvailable from "../../Images/notavailableImg.png";
 
 const SeachSection = styled.section`
   padding: 0rem 0rem;
@@ -43,7 +44,7 @@ const Search = ({ dataSearchResult, searchedWord, tvDataSearched }) => {
       return arrayResearch.map((movie) => {
         return (
           <CardContainer
-            src={poster + movie.poster_path}
+            src={movie.poster_path ? poster + movie.poster_path : NotAvailable}
             title={movie.title ? movie.title : movie.name}
             popularity={`Popularité: ${movie.popularity}`}
             details={`${movie.overview}`}
@@ -61,7 +62,7 @@ const Search = ({ dataSearchResult, searchedWord, tvDataSearched }) => {
         return tvDataSearched.map((tv) => {
           return (
             <CardContainer
-              src={poster + tv.poster_path}
+              src={tv.poster_path ? poster + tv.poster_path : NotAvailable}
               title={tv.title ? tv.title : tv.name}
               popularity={`Popularité: ${tv.popularity}`}
               details={`${tv.overview}`}

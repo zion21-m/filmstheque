@@ -24,6 +24,7 @@ const MovieSection = styled.section`
   .pagination {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-content: center;
     margin-top: 0.5rem;

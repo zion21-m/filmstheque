@@ -78,6 +78,7 @@ const MovieDetails = (props) => {
         .then(function (data) {
           setMovieDetails(data);
         });
+      window.scrollTo(0, 0);
     },
     [url]
   );
