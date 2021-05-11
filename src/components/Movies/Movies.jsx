@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-// import Pagination from "react-bootstrap/Pagination";
-// import PageItem from "react-bootstrap/PageItem";
 import Pagination from "react-bootstrap-4-pagination";
-
+import Button from "react-bootstrap/Button";
 import CardContainer from "../Card-film/Card-container";
 import styled from "styled-components";
 import Loader from "../Loader/Loader";
@@ -30,11 +28,32 @@ const MovieSection = styled.section`
     margin-top: 0.5rem;
   }
 `;
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0rem;
+  margin-bottom: 1rem;
+  Button {
+    margin: 0.5rem;
+  }
+`;
+const StyledPagination = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  align-content: center;
+  margin-top: 0.5rem;
+  width: 80%;
+`;
 
 const Movies = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [pageNumber, setPageNumber] = useState();
   const [movieByPopularity, setMovieByPopularity] = useState();
+  const [tvToShow, setTvToShow] = useState(8);
+
   useEffect(
     function () {
       fetch(
@@ -69,7 +88,6 @@ const Movies = () => {
     disabledBorderColor: "#dddddd",
     activeColor: "#ffffff",
     color: "#0362FF",
-    // disabledColor: "#656565",
     shadow: true,
     center: true,
 
@@ -77,11 +95,22 @@ const Movies = () => {
       setPageNumber(page);
     },
   };
+  const showMore = (e) => {
+    e.preventDefault();
+    setTvToShow(tvToShow + 4);
+  };
+
+  const showLess = (e) => {
+    e.preventDefault();
+    setTvToShow(tvToShow - 4);
+  };
 
   const imgUrl = "https://image.tmdb.org/t/p/w1280";
   const arrayMoviesByPopularity = [];
   for (let index in movieByPopularity) {
-    arrayMoviesByPopularity.push(movieByPopularity[index]);
+    if (index < tvToShow) {
+      arrayMoviesByPopularity.push(movieByPopularity[index]);
+    }
   }
 
   if (!movieByPopularity) {
@@ -102,12 +131,6 @@ const Movies = () => {
       });
     };
 
-    // function App() {
-    //   return (
-    //     <div className="App">
-    //     </div>
-    //   );
-    // }
     return (
       <MovieSection>
         <h1>Trouve ton film</h1>
@@ -116,27 +139,27 @@ const Movies = () => {
           autres utilisateurs, afin de vous présenter le meilleur.
         </p>
         <div className="moviesContainer">{renderMoviesByPopularity()}</div>
+        <ButtonContainer>
+          {tvToShow < 16 ? (
+            <Button variant="primary" onClick={showMore}>
+              Voir plus
+            </Button>
+          ) : (
+            <div></div>
+          )}
+          {tvToShow > 4 ? (
+            <Button variant="warning" onClick={showLess}>
+              Voir moins
+            </Button>
+          ) : (
+            <div></div>
+          )}
+        </ButtonContainer>
         <div className="pagination">
-          <Pagination {...paginationConfig} />
+          <StyledPagination>
+            <Pagination {...paginationConfig} />
+          </StyledPagination>
         </div>
-        {/* <Pagination {...mdSize} shadow /> */}
-        {/* <Pagination>
-          <Pagination.First />
-          <Pagination.Prev />
-          <Pagination.Item>{1}</Pagination.Item>
-          <Pagination.Ellipsis />
-
-          <Pagination.Item>{10}</Pagination.Item>
-          <Pagination.Item>{11}</Pagination.Item>
-          <Pagination.Item active>{12}</Pagination.Item>
-          <Pagination.Item>{13}</Pagination.Item>
-          <Pagination.Item disabled>{14}</Pagination.Item>
-
-          <Pagination.Ellipsis />
-          <Pagination.Item>{20}</Pagination.Item>
-          <Pagination.Next />
-          <Pagination.Last />
-        </Pagination> */}
       </MovieSection>
     );
   }

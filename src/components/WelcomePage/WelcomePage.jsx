@@ -7,6 +7,12 @@ const WelcomePageStyled = styled.section`
   width: 100%;
   height: auto;
   background-color: #353535;
+
+  .carousel-control-next-icon,
+  .carousel-control-prev-icon {
+    background-color: #0765ff;
+  }
+
   .movie-container {
     position: relative;
   }
@@ -63,12 +69,18 @@ const WelcomePage = () => {
 
   const renderUpComingMovies = () => {
     return (
-      <Carousel interval={2000} pause={false} className="movie-container">
+      <Carousel
+        className="movie-container"
+        pause={false}
+        nextLabel=""
+        prevLabel=""
+        fade
+      >
         {arrayUpcomingMovies.map((upComingMovie) => {
           return (
-            <Carousel.Item>
+            <Carousel.Item interval={3000}>
               <img
-                className="d-block w-100 welcome-image "
+                className="d-block w-100 welcome-image"
                 src={imgUrl + upComingMovie.backdrop_path}
                 alt={upComingMovie.title}
               />

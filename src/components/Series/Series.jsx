@@ -103,7 +103,6 @@ const Series = () => {
     const arrayPopularTv = [];
     for (let index in tvPopular) {
       if (index < tvToShow) {
-        console.log("tvshow", tvToShow);
         arrayPopularTv.push(tvPopular[index]);
       }
     }

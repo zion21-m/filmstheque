@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const NavigationContainerStyled = styled.div`
-  border-color: #000;
-`;
+// export const NavigationContainerStyled = styled.div`
+//   border-color: #000;
+// `;
 export const StyledNavigationBar = styled.div`
-  background-color: #000000;
+  /* background-color: #000000; */
   padding-right: 2rem;
   display: flex;
   flex-direction: row;
