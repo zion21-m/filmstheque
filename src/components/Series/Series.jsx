@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Pagination from "react-bootstrap-4-pagination";
 import CardContainer from "../Card-film/Card-container";
 import styled from "styled-components";
+import Button from "react-bootstrap/Button";
 
 const PopularTvStyled = styled.section`
   display: flex;
@@ -19,11 +20,21 @@ const StyledPagination = styled.div`
   margin-top: 0.5rem;
   width: 80%;
 `;
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0rem;
+  margin-bottom: 1rem;
+  Button {
+    margin: 0.5rem;
+  }
+`;
 
 const Series = () => {
   const [tvPopular, setTvPopular] = useState();
   const [totalPages, setTotalPages] = useState(1);
   const [pageNumber, setPageNumber] = useState();
+  const [tvToShow, setTvToShow] = useState(8);
 
   let size = "lg";
   if (window.screen.width < 700) {
@@ -78,10 +89,23 @@ const Series = () => {
 
   const imgUrl = "https://image.tmdb.org/t/p/w1280";
 
+  const showMore = (e) => {
+    e.preventDefault();
+    setTvToShow(tvToShow + 4);
+  };
+
+  const showLess = (e) => {
+    e.preventDefault();
+    setTvToShow(tvToShow - 4);
+  };
+
   const renderTvPopular = () => {
     const arrayPopularTv = [];
     for (let index in tvPopular) {
-      arrayPopularTv.push(tvPopular[index]);
+      if (index < tvToShow) {
+        console.log("tvshow", tvToShow);
+        arrayPopularTv.push(tvPopular[index]);
+      }
     }
     return arrayPopularTv.map((tvpopular) => {
       return (
@@ -100,6 +124,22 @@ const Series = () => {
     <>
       <h1>Les series populaires</h1>
       <PopularTvStyled>{renderTvPopular()}</PopularTvStyled>
+      <ButtonContainer>
+        {tvToShow < 16 ? (
+          <Button variant="primary" onClick={showMore}>
+            Voir plus
+          </Button>
+        ) : (
+          <div></div>
+        )}
+        {tvToShow > 4 ? (
+          <Button variant="warning" onClick={showLess}>
+            Voir moins
+          </Button>
+        ) : (
+          <div></div>
+        )}
+      </ButtonContainer>
       <StyledPagination>
         <Pagination {...paginationConfig} />
       </StyledPagination>
