@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import ImgLoader from "../Loader/ImgLoader";
+
 const MoreInformations = styled.div`
   background-color: #1985a1;
   color: white;
@@ -87,7 +89,7 @@ const CardContainer = ({
   return (
     <CardContainerStyled>
       <div className="imgContainer">
-        <img src={src} alt={alt} />
+        {src ? <img src={src} alt={alt} /> : <ImgLoader />}
       </div>
       <div className="movie-details">
         <p className="movie-title">{title}</p>

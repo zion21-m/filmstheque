@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Carousel from "react-bootstrap/Carousel";
+import Loader from "../Loader/Loader";
 
 const WelcomePageStyled = styled.section`
   width: 100%;
   height: auto;
   background-color: #353535;
   .movie-container {
-    /* width: 100vw; */
     position: relative;
   }
   .welcome-image {
@@ -59,7 +59,7 @@ const WelcomePage = () => {
       arrayUpcomingMovies.push(upComingMovies[index]);
     }
   }
-  const poster = "https://image.tmdb.org/t/p/w1280";
+  const imgUrl = "https://image.tmdb.org/t/p/w1280";
 
   const renderUpComingMovies = () => {
     return (
@@ -69,18 +69,16 @@ const WelcomePage = () => {
             <Carousel.Item>
               <img
                 className="d-block w-100 welcome-image "
-                src={poster + upComingMovie.backdrop_path}
-                alt="First slide"
+                src={imgUrl + upComingMovie.backdrop_path}
+                alt={upComingMovie.title}
               />
               <Carousel.Caption className="movie-information">
-                {/* <div className="movie-information"> */}
                 <h3 className="movie-title">
                   {upComingMovie.title
                     ? upComingMovie.title
                     : upComingMovie.original_title}
                 </h3>
                 <p>Date de sortie: {upComingMovie.release_date}</p>
-                {/* </div> */}
               </Carousel.Caption>
             </Carousel.Item>
           );
@@ -88,8 +86,15 @@ const WelcomePage = () => {
       </Carousel>
     );
   };
-
-  return <WelcomePageStyled>{renderUpComingMovies()}</WelcomePageStyled>;
+  if (!upComingMovies) {
+    return (
+      <WelcomePageStyled>
+        <Loader />
+      </WelcomePageStyled>
+    );
+  } else {
+    return <WelcomePageStyled>{renderUpComingMovies()}</WelcomePageStyled>;
+  }
 };
 
 export default WelcomePage;
