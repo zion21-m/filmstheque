@@ -21,16 +21,23 @@ const MovieSection = styled.section`
   .moviesPresentationText {
     font-size: 1rem;
   }
+  .pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    margin-top: 0.5rem;
+  }
 `;
 
 const Movies = () => {
-  const [pages, setPages] = useState(1);
-  const [pageFetch, setPageFetch] = useState();
+  const [totalPages, setTotalPages] = useState(1);
+  const [pageNumber, setPageNumber] = useState();
   const [movieByPopularity, setMovieByPopularity] = useState();
   useEffect(
     function () {
       fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=fr&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageFetch}&with_watch_monetization_types=flatrate`
+        `https://api.themoviedb.org/3/discover/movie?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=fr&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNumber}&with_watch_monetization_types=flatrate`
       )
         .then(function (result) {
           return result.json();
@@ -38,37 +45,37 @@ const Movies = () => {
         .then(function (data) {
           const movies = data;
           setMovieByPopularity(movies.results);
-          setPages(data.total_pages);
+          setTotalPages(data.total_pages);
           console.log(data);
         });
     },
-    [pageFetch]
+    [pageNumber]
   );
 
   let paginationConfig = {
-    totalPages: pages,
-    currentPage: pageFetch,
+    totalPages: totalPages,
+    currentPage: pageNumber,
     showMax: 10,
     size: "lg",
     threeDots: true,
     prevNext: true,
     href: "/movies?page=*", // * will be replaced by the page number
     pageOneHref: "/movies",
-    borderColor: "blue",
+    borderColor: "#0362FF",
     activeBorderColor: "#0362FF",
     activeBgColor: "#0362FF",
     disabledBgColor: "#dddddd",
+    disabledBorderColor: "#dddddd",
     activeColor: "#ffffff",
     color: "#0362FF",
-    disabledColor: "#fff",
+    // disabledColor: "#656565",
     shadow: true,
+    center: true,
 
     onClick: (page) => {
-      setPageFetch(page);
-      console.log("page", page);
+      setPageNumber(page);
     },
   };
-  // console.log("pageFetch", pageFetch);
 
   const imgUrl = "https://image.tmdb.org/t/p/w1280";
   const arrayMoviesByPopularity = [];
@@ -108,7 +115,10 @@ const Movies = () => {
           autres utilisateurs, afin de vous présenter le meilleur.
         </p>
         <div className="moviesContainer">{renderMoviesByPopularity()}</div>
-        <Pagination {...paginationConfig} />
+        <div className="pagination">
+          <Pagination {...paginationConfig} />
+        </div>
+        {/* <Pagination {...mdSize} shadow /> */}
         {/* <Pagination>
           <Pagination.First />
           <Pagination.Prev />
