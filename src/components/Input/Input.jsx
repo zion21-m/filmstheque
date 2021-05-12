@@ -29,7 +29,14 @@ const InputField = styled.div`
   }
 `;
 
-const Input = ({ placeholder, type, ClassName, onChange, onClick }) => {
+const Input = ({
+  placeholder,
+  type,
+  ClassName,
+  onChange,
+  onClick,
+  searchedWord,
+}) => {
   return (
     <InputField>
       <StyledInput
@@ -37,6 +44,7 @@ const Input = ({ placeholder, type, ClassName, onChange, onClick }) => {
         type={type}
         className="input-search"
         onChange={onChange}
+        value={searchedWord}
       />
       <StyledSearch className={ClassName} onClick={onClick}>
         <Link to="/search" className="searchLink">

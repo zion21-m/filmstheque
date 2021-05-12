@@ -3,7 +3,14 @@ import Pagination from "react-bootstrap-4-pagination";
 import CardContainer from "../Card-film/Card-container";
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
+import Loader from "../Loader/Loader";
 
+const SerieStyled = styled.div`
+  padding-top: 5rem;
+  h1 {
+    margin-left: 5rem;
+  }
+`;
 const PopularTvStyled = styled.section`
   display: flex;
   justify-content: center;
@@ -35,6 +42,7 @@ const Series = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [pageNumber, setPageNumber] = useState();
   const [tvToShow, setTvToShow] = useState(8);
+  const [loading, setLoading] = useState(false);
 
   let size = "lg";
   if (window.screen.width < 700) {
@@ -47,6 +55,7 @@ const Series = () => {
 
   useEffect(
     function () {
+      setLoading(true);
       fetch(
         `https://api.themoviedb.org/3/tv/popular?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=FR&page=${pageNumber}`
       )
@@ -54,6 +63,7 @@ const Series = () => {
           return result.json();
         })
         .then(function (data) {
+          setLoading(false);
           const tvSeries = data;
           setTvPopular(tvSeries.results);
           setTotalPages(tvSeries.total_pages);
@@ -120,29 +130,39 @@ const Series = () => {
     });
   };
   return (
-    <>
-      <h1>Les series populaires</h1>
-      <PopularTvStyled>{renderTvPopular()}</PopularTvStyled>
-      <ButtonContainer>
-        {tvToShow < 16 ? (
-          <Button variant="primary" onClick={showMore}>
-            Voir plus
-          </Button>
-        ) : (
-          <div></div>
-        )}
-        {tvToShow > 4 ? (
-          <Button variant="warning" onClick={showLess}>
-            Voir moins
-          </Button>
-        ) : (
-          <div></div>
-        )}
-      </ButtonContainer>
-      <StyledPagination>
-        <Pagination {...paginationConfig} />
-      </StyledPagination>
-    </>
+    <SerieStyled>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          {<h1>Les series populaires</h1>}
+          {<PopularTvStyled>{renderTvPopular()}</PopularTvStyled>}
+          {
+            <ButtonContainer>
+              {tvToShow < 16 ? (
+                <Button variant="primary" onClick={showMore}>
+                  Voir plus
+                </Button>
+              ) : (
+                <div></div>
+              )}
+              {tvToShow > 4 ? (
+                <Button variant="warning" onClick={showLess}>
+                  Voir moins
+                </Button>
+              ) : (
+                <div></div>
+              )}
+            </ButtonContainer>
+          }
+          {
+            <StyledPagination>
+              <Pagination {...paginationConfig} />
+            </StyledPagination>
+          }
+        </>
+      )}
+    </SerieStyled>
   );
 };
 

@@ -66,14 +66,13 @@ const NavBar = (props) => {
                   SERIES
                 </NavLink>
               </Nav.Link>
-              <Nav.Link>
-                <Input
-                  type="search"
-                  placeholder="Rechercher un film"
-                  onChange={props.onChange}
-                  onClick={props.onClick}
-                />
-              </Nav.Link>
+
+              <Input
+                type="search"
+                placeholder="Rechercher un film"
+                onChange={props.onChange}
+                onClick={props.onClick}
+              />
             </Nav>
             {/* <Nav></Nav> */}
             {/* <Nav></Nav> */}
