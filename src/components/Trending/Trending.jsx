@@ -16,9 +16,13 @@ export default function Trending({ moviesTrending }) {
   for (let index in moviesTrending) {
     moviesTrendingArray.push(moviesTrending[index]);
   }
+  let itemtoshow = 3;
+  if (window.screen.width < 700) {
+    itemtoshow = 1;
+  }
   return (
     <TrendingMovies>
-      <Carousel itemsToShow={3}>
+      <Carousel itemsToShow={itemtoshow}>
         {moviesTrendingArray.map((movie) => {
           return (
             <CardContainer

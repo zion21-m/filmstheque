@@ -4,17 +4,21 @@ import styled from "styled-components";
 //   border-color: #000;
 // `;
 export const StyledNavigationBar = styled.div`
-  /* background-color: #000000; */
   padding-right: 2rem;
   display: flex;
   flex-direction: row;
+  width: 100%;
   justify-content: flex-end;
-  align-items: center;
-  li {
-    display: inline-block;
-    list-style: none;
-    padding: 0.8rem;
+  text-align: right;
+  @media (max-width: 992px) {
+    .mr-auto {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
   }
+
   .navbar-item {
     text-decoration: none;
     color: #fff;
@@ -22,7 +26,6 @@ export const StyledNavigationBar = styled.div`
   }
   .active {
     color: #ffa106;
-    /* font-weight: bold; */
     border-bottom: 2px solid #ffa106;
     padding-bottom: 0.5rem;
   }

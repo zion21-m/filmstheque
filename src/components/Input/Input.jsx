@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const StyledInput = styled.input`
   padding: 0.5rem;
-  margin-left: 2rem;
   outline: none;
   font-size: 0.8rem;
 `;
@@ -25,18 +24,21 @@ const InputField = styled.div`
     color: #fff;
     font-size: 0.8rem;
   }
+  @media (max-width: 350px) {
+    width: 300px;
+  }
 `;
 
-const Input = ({ placeholder, type, className, onChange, onClick }) => {
+const Input = ({ placeholder, type, ClassName, onChange, onClick }) => {
   return (
     <InputField>
       <StyledInput
         placeholder={placeholder}
         type={type}
-        className={className}
+        className="input-search"
         onChange={onChange}
       />
-      <StyledSearch className="search" onClick={onClick}>
+      <StyledSearch className={ClassName} onClick={onClick}>
         <Link to="/search" className="searchLink">
           Search
         </Link>
