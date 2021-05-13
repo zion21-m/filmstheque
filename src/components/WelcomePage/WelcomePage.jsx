@@ -78,7 +78,7 @@ const WelcomePage = () => {
       >
         {arrayUpcomingMovies.map((upComingMovie) => {
           return (
-            <Carousel.Item interval={3000}>
+            <Carousel.Item interval={3000} key={upComingMovie.id}>
               <img
                 className="d-block w-100 welcome-image"
                 src={imgUrl + upComingMovie.backdrop_path}

@@ -26,6 +26,7 @@ export const MovieDetailsLeftSide = styled.div`
 `;
 export const MovieImage = styled.img`
   width: 100%;
+  /* max-width: 250px; */
   object-fit: contain;
 `;
 export const TitleStyled = styled.h1`
@@ -40,9 +41,37 @@ export const MovieRightSide = styled.div`
   font-size: 1.2rem;
   padding: 1.5rem 1rem;
   text-align: justify;
+  .tagline {
+    font-weight: normal !important;
+  }
   .synosis {
     font-size: 1.4rem;
     font-weight: bold;
+  }
+  .movieGenre {
+    color: #ffa004;
+  }
+  .voteAverage {
+    color: green;
+  }
+  .movieCrew {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .crewMember {
+    padding-bottom: 1rem;
+    padding-right: 2rem;
+  }
+  .crewMemberName {
+    font-weight: bold;
+  }
+  .website {
+    padding-top: 1rem;
+  }
+  .website a {
+    text-decoration: none;
+    color: #5e9bff;
   }
 `;
 export const RecommandationSection = styled.section`
@@ -58,4 +87,18 @@ export const RecommandationStyled = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+`;
+export const ActorSection = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+  padding: 3rem;
+  .actorDiv {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* padding: 1rem; */
+  }
 `;

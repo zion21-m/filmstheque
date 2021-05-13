@@ -23,18 +23,9 @@ const Recommandation = ({ urlSegment }) => {
   const poster = "https://image.tmdb.org/t/p/w1280";
 
   if (!recommandations) {
-    return (
-      <Loader />
-
-      // const movieGenre = () => {
-      //   return recommandations.genres.map((genre) => {
-      //     return <div>{genre.name} &nbsp;</div>;
-      //   });
-      // };
-    );
+    return <Loader />;
   } else {
-    console.log("recommandations", recommandations);
-    return recommandations.map((movie) => {
+    return recommandations.map((movie, index) => {
       return (
         <div>
           <CardContainer
@@ -43,7 +34,7 @@ const Recommandation = ({ urlSegment }) => {
             details={`${movie.overview}`}
             id={movie.id}
             type={movie.media_type}
-            key={movie.id}
+            key={index}
           />
         </div>
       );

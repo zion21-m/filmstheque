@@ -7,7 +7,8 @@ import Loader from "../Loader/Loader";
 import ReactPaginate from "react-paginate";
 
 const MovieSection = styled.section`
-  padding: 1rem;
+  padding: 4rem 1rem;
+
   background-color: #e5e5e5;
   .moviesContainer {
     display: flex;
@@ -49,6 +50,7 @@ const StyledPagination = styled.div`
   width: 80%;
   .paginationBar {
     display: flex;
+    flex-wrap: wrap;
     padding: 1rem;
     font-size: 1.3rem;
     list-style: none;
@@ -81,6 +83,10 @@ const StyledPagination = styled.div`
     color: #2b6dfb;
     padding: 0.2rem 0.5rem;
   }
+  /* .reactPaginate {
+    display: flex;
+    flex-wrap: wrap;
+  } */
 `;
 
 const Movies = () => {
@@ -128,29 +134,6 @@ const Movies = () => {
     previousClassName: "previous",
   };
 
-  // let paginationConfig = {
-  //   totalPages: totalPages,
-  //   currentPage: pageNumber,
-  //   showMax: 10,
-  //   size: "lg",
-  //   threeDots: true,
-  //   prevNext: true,
-  //   href: "/movies?page=*", // * will be replaced by the page number
-  //   pageOneHref: "/movies",
-  //   borderColor: "#0362FF",
-  //   activeBorderColor: "#0362FF",
-  //   activeBgColor: "#0362FF",
-  //   disabledBgColor: "#dddddd",
-  //   disabledBorderColor: "#dddddd",
-  //   activeColor: "#ffffff",
-  //   color: "#0362FF",
-  //   shadow: true,
-  //   center: true,
-
-  //   onClick: (page) => {
-  //     setPageNumber(page);
-  //   },
-  // };
   const showMore = (e) => {
     e.preventDefault();
     setTvToShow(tvToShow + 4);
@@ -213,8 +196,9 @@ const Movies = () => {
         </ButtonContainer>
         <div className="pagination">
           <StyledPagination>
-            {/* <Pagination {...paginationConfig} /> */}
-            <ReactPaginate {...paginationConfig} />
+            <div className="reactPaginate">
+              <ReactPaginate {...paginationConfig} />
+            </div>
           </StyledPagination>
         </div>
       </MovieSection>
