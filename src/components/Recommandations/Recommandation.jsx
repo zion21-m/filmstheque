@@ -43,7 +43,7 @@ const Recommandation = ({ urlSegment }) => {
             details={`${movie.overview}`}
             id={movie.id}
             type={movie.media_type}
-            //   genre={movieGenre()}
+            key={movie.id}
           />
         </div>
       );

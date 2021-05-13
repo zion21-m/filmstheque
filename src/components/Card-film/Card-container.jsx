@@ -85,6 +85,7 @@ const CardContainer = ({
   popularity,
   id,
   type,
+  key,
 }) => {
   return (
     <CardContainerStyled>

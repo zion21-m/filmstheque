@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Input from "../Input/Input";
 import { StyledNavigationBar } from "./NavBarStyle";
 import { Navbar, Nav } from "react-bootstrap";
@@ -46,7 +46,9 @@ const NavBar = (props) => {
       className="fixed-top"
     >
       <div className="container">
-        <Navbar.Brand href="#home">LOGO</Navbar.Brand>
+        <Navbar.Brand href="#home">
+          <Link to="/home">LOGO</Link>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <StyledNavigationBar>
@@ -58,7 +60,7 @@ const NavBar = (props) => {
               </Nav.Link>
               <Nav.Link>
                 <NavLink to="/movies" className="navbar-item">
-                  FILM
+                  FILMS
                 </NavLink>
               </Nav.Link>
               <Nav.Link>

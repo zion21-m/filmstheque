@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import Pagination from "react-bootstrap-4-pagination";
+// import Pagination from "react-bootstrap-4-pagination";
 import Button from "react-bootstrap/Button";
 import CardContainer from "../Card-film/Card-container";
 import styled from "styled-components";
 import Loader from "../Loader/Loader";
+import ReactPaginate from "react-paginate";
 
 const MovieSection = styled.section`
   padding: 1rem;
@@ -46,6 +47,40 @@ const StyledPagination = styled.div`
   align-content: center;
   margin-top: 0.5rem;
   width: 80%;
+  .paginationBar {
+    display: flex;
+    padding: 1rem;
+    font-size: 1.3rem;
+    list-style: none;
+  }
+  .activePage {
+    background-color: #2b6dfb;
+  }
+  .activePageLink {
+    color: #ffffff;
+  }
+  .pageNumber {
+    border: 1px solid #2b6dfb;
+    padding: 0.2rem 0.5rem;
+  }
+  .pageNumberLink {
+    text-decoration: none;
+  }
+  .next {
+    margin: auto;
+    margin-left: 0.5rem;
+    color: #2b6dfb;
+  }
+  .previous {
+    margin: auto;
+    margin-right: 0.5rem;
+    color: #2b6dfb;
+  }
+  .break {
+    border: 1px solid #2b6dfb;
+    color: #2b6dfb;
+    padding: 0.2rem 0.5rem;
+  }
 `;
 
 const Movies = () => {
@@ -71,30 +106,51 @@ const Movies = () => {
     },
     [pageNumber]
   );
-
-  let paginationConfig = {
-    totalPages: totalPages,
-    currentPage: pageNumber,
-    showMax: 10,
-    size: "lg",
-    threeDots: true,
-    prevNext: true,
-    href: "/movies?page=*", // * will be replaced by the page number
-    pageOneHref: "/movies",
-    borderColor: "#0362FF",
-    activeBorderColor: "#0362FF",
-    activeBgColor: "#0362FF",
-    disabledBgColor: "#dddddd",
-    disabledBorderColor: "#dddddd",
-    activeColor: "#ffffff",
-    color: "#0362FF",
-    shadow: true,
-    center: true,
-
-    onClick: (page) => {
-      setPageNumber(page);
-    },
+  const handleClick = (page) => {
+    console.log("page", page.selected + 1);
+    const pageNumber = page.selected + 1;
+    setPageNumber(pageNumber);
   };
+  let paginationConfig = {
+    pageCount: totalPages,
+    pageRangeDisplayed: 4,
+    marginPagesDisplayed: 2,
+    breakLabel: "...",
+    breakClassName: "break",
+    activeClassName: "activePage",
+    activeLinkClassName: "activePageLink",
+    onPageChange: handleClick,
+    pageLinkClassName: "pageNumberLink",
+    pageClassName: "pageNumber",
+    containerClassName: "paginationBar",
+    // forcePage: pageNumber - 1,
+    nextClassName: "next",
+    previousClassName: "previous",
+  };
+
+  // let paginationConfig = {
+  //   totalPages: totalPages,
+  //   currentPage: pageNumber,
+  //   showMax: 10,
+  //   size: "lg",
+  //   threeDots: true,
+  //   prevNext: true,
+  //   href: "/movies?page=*", // * will be replaced by the page number
+  //   pageOneHref: "/movies",
+  //   borderColor: "#0362FF",
+  //   activeBorderColor: "#0362FF",
+  //   activeBgColor: "#0362FF",
+  //   disabledBgColor: "#dddddd",
+  //   disabledBorderColor: "#dddddd",
+  //   activeColor: "#ffffff",
+  //   color: "#0362FF",
+  //   shadow: true,
+  //   center: true,
+
+  //   onClick: (page) => {
+  //     setPageNumber(page);
+  //   },
+  // };
   const showMore = (e) => {
     e.preventDefault();
     setTvToShow(tvToShow + 4);
@@ -157,7 +213,8 @@ const Movies = () => {
         </ButtonContainer>
         <div className="pagination">
           <StyledPagination>
-            <Pagination {...paginationConfig} />
+            {/* <Pagination {...paginationConfig} /> */}
+            <ReactPaginate {...paginationConfig} />
           </StyledPagination>
         </div>
       </MovieSection>

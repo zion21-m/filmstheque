@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import Pagination from "react-bootstrap-4-pagination";
+// import Pagination from "react-bootstrap-4-pagination";
+import ReactPaginate from "react-paginate";
 import CardContainer from "../Card-film/Card-container";
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
@@ -26,6 +27,40 @@ const StyledPagination = styled.div`
   align-content: center;
   margin-top: 0.5rem;
   width: 80%;
+  .active {
+    background-color: #2b6dfb;
+  }
+  .activeLink {
+    color: #ffffff;
+  }
+
+  .pageLink {
+    text-decoration: none;
+  }
+  .pageNumber {
+    border: 1px solid #2b6dfb;
+    padding: 0.2rem 0.5rem;
+  }
+  .pagination {
+    display: flex;
+    padding: 1rem;
+    font-size: 1.3rem;
+  }
+  .next {
+    margin: auto;
+    margin-left: 0.5rem;
+    color: #2b6dfb;
+  }
+  .previous {
+    margin: auto;
+    margin-right: 0.5rem;
+    color: #2b6dfb;
+  }
+  .break {
+    border: 1px solid #2b6dfb;
+    color: #2b6dfb;
+    padding: 0.2rem 0.5rem;
+  }
 `;
 const ButtonContainer = styled.div`
   display: flex;
@@ -40,19 +75,15 @@ const ButtonContainer = styled.div`
 const Series = () => {
   const [tvPopular, setTvPopular] = useState();
   const [totalPages, setTotalPages] = useState(1);
-  const [pageNumber, setPageNumber] = useState();
+  const [pageNumber, setPageNumber] = useState(1);
   const [tvToShow, setTvToShow] = useState(8);
   const [loading, setLoading] = useState(false);
 
-  let size = "lg";
-  if (window.screen.width < 700) {
-    size = "md";
-  }
-  let width = Math.ceil(window.screen.width / 200);
-  if (width < 3) {
-    width = 2;
-  }
-
+  const handlePageChange = (page) => {
+    const pageSelected = page.selected + 1;
+    console.log("e.selected", pageSelected);
+    setPageNumber(pageSelected);
+  };
   useEffect(
     function () {
       setLoading(true);
@@ -71,30 +102,21 @@ const Series = () => {
     },
     [pageNumber]
   );
-
   let paginationConfig = {
-    totalPages: totalPages,
-    currentPage: pageNumber,
-    showMax: width,
-    size: size,
-    threeDots: true,
-    prevNext: true,
-    href: "/movies?page=*", // * will be replaced by the page number
-    pageOneHref: "/movies",
-    borderColor: "#0362FF",
-    activeBorderColor: "#0362FF",
-    activeBgColor: "#0362FF",
-    disabledBgColor: "#dddddd",
-    disabledBorderColor: "#dddddd",
-    activeColor: "#ffffff",
-    color: "#0362FF",
-    // disabledColor: "#656565",
-    shadow: true,
-    center: true,
-
-    onClick: (page) => {
-      setPageNumber(page);
-    },
+    pageCount: totalPages,
+    pageRangeDisplayed: 2,
+    marginPagesDisplayed: 2,
+    breakLabel: "...",
+    breakClassName: "break",
+    activeClassName: "active",
+    activeLinkClassName: "activeLink",
+    onPageChange: handlePageChange,
+    pageLinkClassName: "pageLink",
+    pageClassName: "pageNumber",
+    containerClassName: "pagination",
+    forcePage: pageNumber - 1,
+    nextClassName: "next",
+    previousClassName: "previous",
   };
 
   const imgUrl = "https://image.tmdb.org/t/p/w1280";
@@ -157,7 +179,8 @@ const Series = () => {
           }
           {
             <StyledPagination>
-              <Pagination {...paginationConfig} />
+              {/* <Pagination {...paginationConfig} /> */}
+              <ReactPaginate {...paginationConfig} />
             </StyledPagination>
           }
         </>
