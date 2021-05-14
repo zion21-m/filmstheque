@@ -83,10 +83,6 @@ const StyledPagination = styled.div`
     color: #2b6dfb;
     padding: 0.2rem 0.5rem;
   }
-  /* .reactPaginate {
-    display: flex;
-    flex-wrap: wrap;
-  } */
 `;
 
 const Movies = () => {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import CardActor from "../Card-film/Card-actor";
+import Button from "react-bootstrap/Button";
 import Loader from "../Loader/Loader";
 import Recommandation from "../Recommandations/Recommandation";
 import {
@@ -11,11 +12,14 @@ import {
   RecommandationSection,
   RecommandationStyled,
   ActorSection,
+  ButtonContainer,
 } from "./MovieDetailStyled";
 
 const MovieDetails = (props) => {
   const [movieDetails, setMovieDetails] = useState();
   const [movieCredits, setMovieCredits] = useState([]);
+  const [showActor, setShowActor] = useState(4);
+  const [loading, setLoading] = useState(false);
   const urlSegment = props.match.url;
   const url = `https://api.themoviedb.org/3${urlSegment}?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=fr`;
   const creditUrl = `https://api.themoviedb.org/3${urlSegment}/credits?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=fr`;
@@ -37,12 +41,14 @@ const MovieDetails = (props) => {
   );
   useEffect(
     function () {
+      setLoading(true);
       fetch(creditUrl)
         .then(function (result) {
           return result.json();
         })
         .then(function (data) {
           setMovieCredits(data);
+          setLoading(false);
         });
       window.scrollTo(0, 0);
     },
@@ -74,10 +80,29 @@ const MovieDetails = (props) => {
       );
     });
   };
+  const showMore = (e) => {
+    e.preventDefault();
+    setShowActor(showActor + 4);
+  };
+
+  const showLess = (e) => {
+    e.preventDefault();
+    setShowActor(showActor - 4);
+    // window.scrollTo(0, 0);
+  };
+
+  const actorsArray = [];
+  for (let index in movieCredits.cast) {
+    if (index < showActor) {
+      actorsArray.push(movieCredits.cast[index]);
+    }
+  }
+
+  console.log("actor array", actorsArray);
 
   const actors = () => {
-    if (movieCredits.cast) {
-      return movieCredits.cast.map((actor) => {
+    if (actorsArray) {
+      return actorsArray.map((actor) => {
         return (
           <CardActor
             src={imgUrl + actor.profile_path}
@@ -153,8 +178,30 @@ const MovieDetails = (props) => {
         </MovieDetailStyled>
 
         <ActorSection>
-          <h2>Les personnages de {movieDetails.title}</h2>
-          <div className="actorDiv">{actors()}</div>
+          {loading ? (
+            <h2>Patientez</h2>
+          ) : (
+            <>
+              <h2>Les personnages de {movieDetails.title}</h2>
+              <div className="actorDiv">{actors()}</div>
+              <ButtonContainer>
+                {showActor < movieCredits.cast.length ? (
+                  <Button variant="primary" onClick={showMore}>
+                    Voir plus
+                  </Button>
+                ) : (
+                  <div></div>
+                )}
+                {showActor > 4 ? (
+                  <Button variant="warning" onClick={showLess}>
+                    Voir moins
+                  </Button>
+                ) : (
+                  <div></div>
+                )}
+              </ButtonContainer>
+            </>
+          )}
         </ActorSection>
         <RecommandationSection>
           <h1>Recommandations</h1>

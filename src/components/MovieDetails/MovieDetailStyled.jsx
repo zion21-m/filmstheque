@@ -91,14 +91,24 @@ export const RecommandationStyled = styled.div`
 export const ActorSection = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   padding: 1rem;
   padding: 3rem;
+  background-color: #c5c5c5;
   .actorDiv {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     /* padding: 1rem; */
+  }
+`;
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0rem;
+  margin-bottom: 1rem;
+  Button {
+    margin: 0.5rem;
   }
 `;
