@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
+// import Spinner from 'react-bootstrap/Spinner'
 
 const MoreInformationStyled = styled.div`
   background-color: #1985a1;
@@ -29,6 +31,20 @@ const CardContainerStyled = styled.div`
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
   }
+  .imgLoader {
+    background-color: #ffffff;
+    opacity: 1;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   &:hover .imgContainer img {
     opacity: 0.3;
   }
@@ -51,6 +67,15 @@ const CardContainerStyled = styled.div`
     height: auto;
     transition: 0.5s ease;
     backface-visibility: hidden;
+  }
+  .imageLoader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 250px;
+    opacity: 1;
+    background-color: #fff;
   }
   .movie-details {
     font-size: 1rem;
@@ -84,11 +109,18 @@ const CardContainer = ({
   popularity,
   id,
   type,
+  loading,
 }) => {
   return (
     <CardContainerStyled>
       <div className="imgContainer">
-        <img src={src} alt={alt} />
+        {loading ? (
+          <div className="imageLoader">
+            <Spinner animation="border" variant="primary" />
+          </div>
+        ) : (
+          <img src={src} alt={alt} />
+        )}
       </div>
       <div className="movie-details">
         <p className="movie-title">{title}</p>
@@ -102,6 +134,14 @@ const CardContainer = ({
           <MoreInformationStyled>Voir plus de details</MoreInformationStyled>
         </Link>
       </div>
+
+      {/* {loading ? (
+        <div className="imgLoader">
+          <Spinner animation="border" variant="primary" />
+        </div>
+      ) : (
+        <div></div>
+      )} */}
     </CardContainerStyled>
   );
 };

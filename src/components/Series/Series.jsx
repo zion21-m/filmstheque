@@ -1,107 +1,70 @@
 import { useState, useEffect } from "react";
-// import Pagination from "react-bootstrap-4-pagination";
 import ReactPaginate from "react-paginate";
 import CardContainer from "../Card-film/Card-container";
-import styled from "styled-components";
 import Button from "react-bootstrap/Button";
-import Loader from "../Loader/Loader";
-
-const SerieStyled = styled.div`
-  padding-top: 5rem;
-  h1 {
-    margin-left: 5rem;
-  }
-`;
-const PopularTvStyled = styled.section`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 1rem;
-`;
-const StyledPagination = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0 auto;
-  align-content: center;
-  margin-top: 0.5rem;
-  width: 80%;
-  .active {
-    background-color: #2b6dfb;
-  }
-  .activeLink {
-    color: #ffffff;
-  }
-
-  .pageLink {
-    text-decoration: none;
-  }
-  .pageNumber {
-    border: 1px solid #2b6dfb;
-    padding: 0.2rem 0.5rem;
-  }
-  .pagination {
-    display: flex;
-    padding: 1rem;
-    font-size: 1.3rem;
-  }
-  .next {
-    margin: auto;
-    margin-left: 0.5rem;
-    color: #2b6dfb;
-  }
-  .previous {
-    margin: auto;
-    margin-right: 0.5rem;
-    color: #2b6dfb;
-  }
-  .break {
-    border: 1px solid #2b6dfb;
-    color: #2b6dfb;
-    padding: 0.2rem 0.5rem;
-  }
-`;
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 1rem 0rem;
-  margin-bottom: 1rem;
-  Button {
-    margin: 0.5rem;
-  }
-`;
+// import Loader from "../Loader/Loader";
+import {
+  ButtonContainer,
+  SerieStyled,
+  PopularTvStyled,
+  PaginationStyle,
+  GenresContainerStyle,
+  ActiveGenre,
+  TvSectionStyle,
+} from "./SerieStyle";
+// import SpinnerLoader from "../Loader/Spinner";
 
 const Series = () => {
   const [tvPopular, setTvPopular] = useState();
   const [totalPages, setTotalPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
   const [tvToShow, setTvToShow] = useState(8);
+  const [tvGenre, setTvGenre] = useState([]);
+  const [tvGenreId, setTvGenreId] = useState("");
+  const [activeGenre, setActiveGenre] = useState("Toutes les séries");
   const [loading, setLoading] = useState(false);
 
   const handlePageChange = (page) => {
-    const pageSelected = page.selected + 1;
-    console.log("e.selected", pageSelected);
-    setPageNumber(pageSelected);
+    setPageNumber(page.selected + 1);
   };
-  useEffect(
-    function () {
-      setLoading(true);
-      fetch(
-        `https://api.themoviedb.org/3/tv/popular?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=FR&page=${pageNumber}`
-      )
-        .then(function (result) {
-          return result.json();
-        })
-        .then(function (data) {
-          setLoading(false);
-          const tvSeries = data;
-          setTvPopular(tvSeries.results);
-          setTotalPages(tvSeries.total_pages);
-        });
-    },
-    [pageNumber]
-  );
+  useEffect(() => {
+    setLoading(true);
+    fetch(
+      `https://api.themoviedb.org/3/discover/tv?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=en-US&sort_by=popularity.desc&page=${pageNumber}&timezone=America%2FNew_York&with_genres=${tvGenreId}&include_null_first_air_dates=false&with_watch_monetization_types=flatrate`
+    )
+      .then((result) => result.json())
+      .then((data) => {
+        setLoading(false);
+        setTvPopular(data.results);
+        setTotalPages(data.total_pages);
+      });
+    fetch(
+      "https://api.themoviedb.org/3/genre/tv/list?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=fr"
+    )
+      .then((result) => result.json())
+      .then((data) => {
+        setTvGenre(data.genres);
+      });
+  }, [pageNumber, tvGenreId]);
+
+  const displayTvGenres = () => {
+    if (tvGenre) {
+      return tvGenre.map((genre) => {
+        return (
+          <div
+            className="tvGenre"
+            onClick={() => {
+              setTvGenreId(genre.id);
+              setActiveGenre(genre.name);
+            }}
+          >
+            {genre.name}
+          </div>
+        );
+      });
+    }
+  };
+
   let paginationConfig = {
     pageCount: totalPages,
     pageRangeDisplayed: 2,
@@ -122,12 +85,10 @@ const Series = () => {
   const imgUrl = "https://image.tmdb.org/t/p/w1280";
 
   const showMore = (e) => {
-    e.preventDefault();
     setTvToShow(tvToShow + 4);
   };
 
   const showLess = (e) => {
-    e.preventDefault();
     setTvToShow(tvToShow - 4);
   };
 
@@ -140,51 +101,62 @@ const Series = () => {
     }
     return arrayPopularTv.map((tvpopular) => {
       return (
-        <CardContainer
-          src={imgUrl + tvpopular.poster_path}
-          title={tvpopular.title ? tvpopular.title : tvpopular.name}
-          popularity={`Popularité: ${tvpopular.popularity}`}
-          details={`${tvpopular.overview}`}
-          id={tvpopular.id}
-          type="tv"
-        />
+        <div>
+          <CardContainer
+            src={imgUrl + tvpopular.poster_path}
+            title={tvpopular.title ? tvpopular.title : tvpopular.name}
+            popularity={`Popularité: ${tvpopular.popularity}`}
+            details={`${tvpopular.overview}`}
+            id={tvpopular.id}
+            type="tv"
+            key={tvpopular.id}
+            loading={loading}
+          />
+        </div>
       );
     });
   };
   return (
     <SerieStyled>
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          {<h1>Les series populaires</h1>}
-          {<PopularTvStyled>{renderTvPopular()}</PopularTvStyled>}
-          {
-            <ButtonContainer>
-              {tvToShow < 16 ? (
-                <Button variant="primary" onClick={showMore}>
-                  Voir plus
-                </Button>
-              ) : (
-                <div></div>
-              )}
-              {tvToShow > 4 ? (
-                <Button variant="warning" onClick={showLess}>
-                  Voir moins
-                </Button>
-              ) : (
-                <div></div>
-              )}
-            </ButtonContainer>
-          }
-          {
-            <StyledPagination>
-              {/* <Pagination {...paginationConfig} /> */}
-              <ReactPaginate {...paginationConfig} />
-            </StyledPagination>
-          }
-        </>
-      )}
+      <TvSectionStyle>
+        <GenresContainerStyle>
+          <div
+            className="tvGenre"
+            onClick={() => {
+              setTvGenreId("");
+              setActiveGenre("Toutes les séries");
+            }}
+          >
+            Toutes les séries
+          </div>
+          {displayTvGenres()}
+        </GenresContainerStyle>
+
+        <ActiveGenre>{activeGenre}</ActiveGenre>
+        <h1>Les series populaires</h1>
+        <PopularTvStyled>{renderTvPopular()}</PopularTvStyled>
+
+        <ButtonContainer>
+          {tvToShow < 16 ? (
+            <Button variant="primary" onClick={showMore}>
+              Voir plus
+            </Button>
+          ) : (
+            <div></div>
+          )}
+          {tvToShow > 4 ? (
+            <Button variant="warning" onClick={showLess}>
+              Voir moins
+            </Button>
+          ) : (
+            <div></div>
+          )}
+        </ButtonContainer>
+
+        <PaginationStyle>
+          <ReactPaginate {...paginationConfig} />
+        </PaginationStyle>
+      </TvSectionStyle>
     </SerieStyled>
   );
 };

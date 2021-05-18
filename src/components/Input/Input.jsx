@@ -47,7 +47,7 @@ const Input = ({
         value={searchedWord}
       />
       <StyledSearch className={ClassName} onClick={onClick}>
-        <Link to="/search" className="searchLink">
+        <Link to="/search/movies" className="searchLink">
           Search
         </Link>
       </StyledSearch>

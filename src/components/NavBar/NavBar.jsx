@@ -71,7 +71,7 @@ const NavBar = (props) => {
 
               <Input
                 type="search"
-                placeholder="Rechercher un film"
+                placeholder="Rechercher un film ou une série"
                 onChange={props.onChange}
                 onClick={props.onClick}
               />
