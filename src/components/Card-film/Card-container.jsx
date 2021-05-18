@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import ImgLoader from "../Loader/ImgLoader";
 
-const MoreInformations = styled.div`
+const MoreInformationStyled = styled.div`
   background-color: #1985a1;
   color: white;
   font-size: 1rem;
@@ -69,7 +68,7 @@ const CardContainerStyled = styled.div`
   .voteAverage {
     color: green;
   }
-  ${MoreInformations}:hover {
+  ${MoreInformationStyled}:hover {
     background-color: #e5e5e5;
     border: 1px solid #1985a1;
     color: #1985a1;
@@ -89,7 +88,7 @@ const CardContainer = ({
   return (
     <CardContainerStyled>
       <div className="imgContainer">
-        {src ? <img src={src} alt={alt} /> : <ImgLoader />}
+        <img src={src} alt={alt} />
       </div>
       <div className="movie-details">
         <p className="movie-title">{title}</p>
@@ -100,7 +99,7 @@ const CardContainer = ({
       </div>
       <div className="overlay">
         <Link to={`/${type}/${id}`} className="linkToMovieDetails">
-          <MoreInformations>Voir plus de details</MoreInformations>
+          <MoreInformationStyled>Voir plus de details</MoreInformationStyled>
         </Link>
       </div>
     </CardContainerStyled>

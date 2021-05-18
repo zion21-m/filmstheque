@@ -1,26 +1,8 @@
 import { useState, useEffect } from "react";
 import Trending from "../Trending/Trending";
-import styled from "styled-components";
 import PopularMovies from "../PopularMovies/PopularMovies";
 import WelcomePage from "../WelcomePage/WelcomePage";
-
-const HomeTrendingSection = styled.section`
-  padding: 4rem 1rem;
-  background: #e5e5e5;
-  h1 {
-    font-size: 2rem;
-    margin-left: 5rem;
-  }
-`;
-const HomePopularSection = styled.section`
-  padding: 4rem 1rem;
-  background: #191919;
-  h1 {
-    font-size: 2rem;
-    margin-left: 5rem;
-    color: #fff;
-  }
-`;
+import { HomePopularSection, HomeTrendingSection } from "./HomeStyle";
 
 const Home = () => {
   const [trend, setTrend] = useState();

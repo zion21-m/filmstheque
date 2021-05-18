@@ -156,8 +156,33 @@ const MovieDetails = (props) => {
             <p className="synosis">Synopsis</p>
             <p>{movieDetails.overview}</p>
             <div>
-              <i>Durée : </i>
-              {movieDetails.runtime} minutes
+              {movieDetails.runtime ? (
+                <>
+                  <i>Durée : </i>
+                  {movieDetails.runtime} minutes
+                </>
+              ) : (
+                <>
+                  <div>
+                    <i>
+                      Durée par épisode: {movieDetails.episode_run_time[0]}{" "}
+                      minutes
+                    </i>
+                  </div>
+                  <div>
+                    <i>
+                      Nombre d'épisodes : {movieDetails.number_of_episodes}
+                      &nbsp; épisodes
+                    </i>
+                  </div>
+                  <div>
+                    <i>
+                      Nombre de saisons : {movieDetails.number_of_seasons}&nbsp;
+                      saison(s)
+                    </i>
+                  </div>
+                </>
+              )}
             </div>
             <div>{movieGenre()}</div>
 
