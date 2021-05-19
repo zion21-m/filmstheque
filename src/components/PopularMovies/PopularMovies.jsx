@@ -11,16 +11,19 @@ const PopularMovieStyled = styled.div`
   justify-content: center;
   padding: 1rem;
 `;
-
+let item = 4;
+if (window.screen.width < 600) {
+  item = 1;
+}
+console.log(window.screen.width);
 export default function PopularMovies({ popularMovies }) {
-  console.log("popularMovies", popularMovies);
   let PopularMoviesArray = [];
   for (let index in popularMovies) {
     PopularMoviesArray.push(popularMovies[index]);
   }
   return (
     <PopularMovieStyled>
-      <Carousel itemsToShow={4}>
+      <Carousel itemsToShow={item}>
         {PopularMoviesArray.map((movie) => {
           return (
             <CardContainer
