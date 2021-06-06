@@ -6,7 +6,10 @@ import { SearchSection } from "./SearchStyled";
 const Search = ({ searchedWord }) => {
   return (
     <SearchSection>
-      <p>Clickez sur une des catégories pour voir les résultats</p>
+      <p className="search-text">
+        Clickez sur une des catégories pour voir les résultats correspondant à
+        cette catégorie
+      </p>
       <ul>
         <NavLink to="/search/movies">
           <li>Films</li>

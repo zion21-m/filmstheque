@@ -2,18 +2,14 @@ import styled from "styled-components";
 
 export const MovieSection = styled.section`
   padding: 4rem 1rem;
+  padding-top: 6rem;
   background-color: #e5e5e5;
   .moviesContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
-  h1 {
-    font-size: 1.3rem;
-  }
-  .moviesPresentationText {
-    font-size: 1rem;
-  }
+
   .pagination {
     display: flex;
     flex-direction: row;
@@ -89,6 +85,10 @@ export const GenresContainerStyle = styled.div`
     cursor: pointer;
   }
   .movieGenre:hover {
+    color: #fff;
+    background-color: #2b6dfb;
+  }
+  .movieGenre:focus {
     color: #fff;
     background-color: #2b6dfb;
   }

@@ -18,7 +18,7 @@ const Movies = () => {
   const [tvToShow, setTvToShow] = useState(8);
   const [moviesGenre, setMoviesGenre] = useState([]);
   const [movieGenreId, setMovieGenreId] = useState("");
-  const [activeGenre, setActiveGenre] = useState("All");
+  const [activeGenre, setActiveGenre] = useState("Tous les films");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const Movies = () => {
     if (moviesGenre) {
       return moviesGenre.map((genre) => {
         return (
-          <div
+          <button
             className="movieGenre"
             onClick={() => {
               setMovieGenreId(genre.id);
@@ -53,8 +53,7 @@ const Movies = () => {
             }}
           >
             {genre.name}
-            {console.log("url genre segment", movieGenreId)}
-          </div>
+          </button>
         );
       });
     }
@@ -116,11 +115,6 @@ const Movies = () => {
 
     return (
       <MovieSection>
-        <h1>Trouve ton film</h1>
-        <p className="moviesPresentationText">
-          Nos films sont présentés par popularité, en fonction des avis des
-          autres utilisateurs, afin de vous présenter le meilleur.
-        </p>
         <GenresContainerStyle>
           <div
             className="movieGenre"
@@ -129,7 +123,7 @@ const Movies = () => {
               setActiveGenre("All");
             }}
           >
-            All
+            Tous les films
           </div>
           {displayMoviesGenres()}
         </GenresContainerStyle>

@@ -15,7 +15,7 @@ const MoreInformationStyled = styled.div`
 `;
 const CardContainerStyled = styled.div`
   position: relative;
-  max-width: 250px;
+  max-width: 200px;
   background-color: #fff;
   padding: 0.5rem;
   margin: 0.5rem;

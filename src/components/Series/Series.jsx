@@ -133,7 +133,6 @@ const Series = () => {
         </GenresContainerStyle>
 
         <ActiveGenre>{activeGenre}</ActiveGenre>
-        <h1>Les series populaires</h1>
         <PopularTvStyled>{renderTvPopular()}</PopularTvStyled>
 
         <ButtonContainer>
