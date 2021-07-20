@@ -16,8 +16,7 @@ const Home = () => {
         return result.json();
       })
       .then(function (data) {
-        const trending = data;
-        setTrend(trending.results);
+        setTrend(data.results);
       });
     fetch(
       "https://api.themoviedb.org/3/movie/popular?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=en-US&page=1"
@@ -26,8 +25,7 @@ const Home = () => {
         return result.json();
       })
       .then(function (data) {
-        const popular = data;
-        setPopular(popular.results);
+        setPopular(data.results);
       });
   }, []);
 

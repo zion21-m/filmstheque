@@ -5,7 +5,39 @@ export const StyledStartingPage = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 5rem;
   width: 100%;
-  height: 90vh;
-  background-color: red;
+  height: 83vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: relative;
+
+  &::after {
+    content: "";
+    background-size: cover;
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    background: url("${(props) => (props.urlImage ? props.urlImage : "")}");
+    background-attachment: fixed;
+    background-size: contain;
+  }
+
+  .welcomeText {
+    color: #0275d8;
+    font-size: 3rem;
+    font-weight: 700;
+  }
+  .text {
+    color: #fff;
+    font-size: 1.1rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+  }
+  .btn {
+    margin-top: 1.5rem;
+  }
 `;
