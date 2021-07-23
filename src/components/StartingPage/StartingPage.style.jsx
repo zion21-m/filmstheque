@@ -10,6 +10,7 @@ export const StyledStartingPage = styled.div`
   height: 83vh;
   background-color: rgba(0, 0, 0, 0.7);
   position: relative;
+  margin-top: 3rem;
 
   &::after {
     content: "";
