@@ -42,7 +42,7 @@ const StartingPage = () => {
   } else {
     return (
       <StyledStartingPage urlImage={poster + data[0].backdrop_path}>
-        <div className="welcomeText">Bienvenue sur notre site</div>
+        <div className="welcomeText">Bienvenue sur Nuru-films</div>
         <div className="text">
           Trouvez tous les films et series que vous cherchez, et si vous n'avez
           pas de préférence, nous vous proposons, les films tendances, et les
