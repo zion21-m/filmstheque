@@ -16,16 +16,25 @@ export default function Trending({ moviesTrending }) {
   for (let index in moviesTrending) {
     moviesTrendingArray.push(moviesTrending[index]);
   }
-  let itemtoshow = 3;
-  if (window.screen.width < 700) {
-    itemtoshow = 1;
-  }
+  let itemtoshow = 4;
+  
+  const breakPoints = [
+    { width: 200, itemsToShow: 1, itemsToScroll:2},
+
+    { width: 450, itemsToShow: 2, itemsToScroll:2},
+    { width: 550, itemsToShow: 3,  pagination: true },
+    { width: 750, itemsToShow: 4 },
+    { width: 850, itemsToShow: 4 },
+    { width: 1150, itemsToShow: 4, itemsToScroll: 2 },
+    { width: 1450, itemsToShow: 5 },
+    { width: 1750, itemsToShow: 6 },
+  ]
   return (
     <TrendingMovies>
-      <Carousel itemsToShow={itemtoshow}>
-        {moviesTrendingArray.map((movie) => {
+      <Carousel itemsToShow={itemtoshow} breakPoints={breakPoints}>
+        {moviesTrendingArray.map((movie,index) => {
           return (
-            <CardContainer
+            <CardContainer key={index}
               src={poster + movie.poster_path}
               title={movie.title ? movie.title : movie.name}
               details={`${movie.overview}`}

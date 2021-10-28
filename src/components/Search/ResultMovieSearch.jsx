@@ -40,7 +40,7 @@ const ResultMovieSearch = ({ searchedWord }) => {
   }
 
   const renderSearch = () => {
-    return arrayResearch.map((movie) => {
+    return arrayResearch.map((movie, index) => {
       return (
         <CardContainer
           src={movie.poster_path ? imgUrl + movie.poster_path : NotAvailable}
@@ -49,6 +49,7 @@ const ResultMovieSearch = ({ searchedWord }) => {
           details={`${movie.overview}`}
           id={movie.id}
           type="movie"
+          key={index}
         />
       );
     });

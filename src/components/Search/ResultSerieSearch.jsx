@@ -35,7 +35,7 @@ const ResultSerieSearch = ({ searchedWord }) => {
     if (!tvDataSearched) {
       return <Loader />;
     } else {
-      return tvDataSearched.map((tv) => {
+      return tvDataSearched.map((tv, index) => {
         return (
           <CardContainer
             src={tv.poster_path ? imgUrl + tv.poster_path : NotAvailable}
@@ -44,6 +44,7 @@ const ResultSerieSearch = ({ searchedWord }) => {
             details={`${tv.overview}`}
             id={tv.id}
             type="tv"
+            key={index}
           />
         );
       });

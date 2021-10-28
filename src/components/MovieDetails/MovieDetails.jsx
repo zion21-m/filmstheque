@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
+import {Modal, Button} from 'react-bootstrap';
+
 import CardActor from "../Card-film/Card-actor";
-import Button from "react-bootstrap/Button";
+
 import Loader from "../Loader/Loader";
 import Recommandation from "../Recommandations/Recommandation";
+
 import {
   MovieDetailStyled,
   MovieDetailsLeftSide,
@@ -20,9 +23,18 @@ const MovieDetails = (props) => {
   const [movieCredits, setMovieCredits] = useState([]);
   const [showActor, setShowActor] = useState(4);
   const [loading, setLoading] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
+
+  // const [movieId, setMovieId] = useState();
+  const [movieVideoELements, setMovieVideoElements]= useState();
+
+
   const urlSegment = props.match.url;
+  console.log("urlsegment", props.match);
+
   const url = `https://api.themoviedb.org/3${urlSegment}?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=fr`;
   const creditUrl = `https://api.themoviedb.org/3${urlSegment}/credits?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=fr`;
+  const videoUrl = movieDetails? `https://api.themoviedb.org/3/${urlSegment}/videos?api_key=dc9e7a7e71a1b73d9218ca72a5d9900c&language=fr`: "";
 
   const imgUrl = "https://image.tmdb.org/t/p/w1280";
 
@@ -39,6 +51,7 @@ const MovieDetails = (props) => {
     },
     [url]
   );
+
   useEffect(
     function () {
       setLoading(true);
@@ -54,8 +67,27 @@ const MovieDetails = (props) => {
     },
     [creditUrl]
   );
-  console.log(movieDetails);
+
+  useEffect(
+    function () {
+      fetch(videoUrl)
+        .then(function (result) {
+          return result.json();
+        })
+        .then(function (data) {
+          setMovieVideoElements(data);
+        });
+      // window.scrollTo(0, 0);
+    },
+    [videoUrl]
+  );
+
+//  if(movieDetails) setMovieId(movieDetails.id)
+
+  console.log("movies details", movieDetails);
   console.log("movie credits", movieCredits);
+  console.log("movie video", movieVideoELements)
+
   let movieTeam = [];
   if (movieCredits.crew) {
     for (let member of movieCredits.crew) {
@@ -70,9 +102,9 @@ const MovieDetails = (props) => {
   }
 
   const crewMembers = () => {
-    return movieTeam.map((teamMember) => {
+    return movieTeam.map((teamMember,index) => {
       return (
-        <div className="crewMember">
+        <div className="crewMember" key={index}>
           <span className="crewMemberName">{teamMember.name}</span>
           <br />
           <span>{teamMember.job}</span>
@@ -88,7 +120,7 @@ const MovieDetails = (props) => {
   const showLess = (e) => {
     e.preventDefault();
     setShowActor(showActor - 4);
-    // window.scrollTo(0, 0);
+    
   };
 
   const actorsArray = [];
@@ -98,7 +130,7 @@ const MovieDetails = (props) => {
     }
   }
 
-  console.log("actor array", actorsArray);
+  
 
   const actors = () => {
     if (actorsArray) {
@@ -126,9 +158,55 @@ const MovieDetails = (props) => {
         );
       });
     };
+
+    function ShowPreview(props) {
+      
+        const showTrailer = ()=> {
+          if(!movieVideoELements){
+            return <div style={{fontSize:"20px", textAlign:"center"}} >Video non disponible</div>
+
+          }  else if(movieVideoELements.results.length > 0) {
+           return <iframe title="themovie" width="100%" height="400px" src={`http://www.youtube.com/embed/${movieVideoELements.results[0].key}`}frameborder="0"> </iframe>            
+
+          } else {
+            return <div style={{fontSize:"20px", textAlign:"center"}}>Video non disponible</div>
+          }
+        }
+      
+      
+      return (
+        
+        <Modal
+          {...props}
+          size="xl"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          contentClassName="modal-style"
+          fullscreen="true"
+        >
+          <Modal.Header >
+            <Modal.Title id="contained-modal-title-vcenter">
+              Trailer
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body centered>
+            { showTrailer()}
+          
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={props.onHide}>Fermer</Button>
+          </Modal.Footer>
+        </Modal>
+      
+      );
+    }
+
     return (
       <>
         <MovieDetailStyled urlImage={imgUrl + movieDetails.backdrop_path}>
+          
+  
+  {/* <MovieModal/> */}
           <MovieDetailsLeftSide className="movieLeftSide">
             <MovieImage
               src={`${imgUrl}${
@@ -199,6 +277,18 @@ const MovieDetails = (props) => {
                 "information non disponible"
               )}
             </div>
+            <div>
+
+        <Button variant="primary" onClick={() => setModalShow(true)}>
+          Voir le trailer
+        </Button>
+  
+        <ShowPreview
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+          
+          </div>
           </MovieRightSide>
         </MovieDetailStyled>
 
@@ -207,7 +297,7 @@ const MovieDetails = (props) => {
             <h2>Patientez</h2>
           ) : (
             <>
-              <h2>Les personnages de {movieDetails.title}</h2>
+              <h2>Les personnages de {movieDetails.title?movieDetails.title: movieDetails.name}</h2>
               <div className="actorDiv">{actors()}</div>
               <ButtonContainer>
                 {showActor < movieCredits.cast.length ? (
@@ -234,7 +324,7 @@ const MovieDetails = (props) => {
             <Recommandation urlSegment={urlSegment} key={movieDetails.id} />
           </RecommandationStyled>
         </RecommandationSection>
-        {console.log(actors())}
+        
       </>
     );
   } else {

@@ -19,10 +19,19 @@ export const MovieDetailStyled = styled.div`
     position: absolute;
     z-index: -1;
   }
+  @media only screen and (max-width:870px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+  }
 `;
 export const MovieDetailsLeftSide = styled.div`
   width: 30vw;
   padding: 1.5rem 1rem;
+  @media only screen and (max-width:870px) {
+    width: 50vw;
+  }
 `;
 export const MovieImage = styled.img`
   width: 100%;
@@ -68,19 +77,21 @@ export const MovieRightSide = styled.div`
   }
   .website {
     padding-top: 1rem;
+    margin-bottom:1rem;
   }
   .website a {
     text-decoration: none;
     color: #5e9bff;
   }
+  
 `;
 export const RecommandationSection = styled.section`
   background-color: #e5e5e5;
   padding: 4rem 1rem;
   h1 {
     font-size: 2rem;
-    margin-left: 3.5rem;
     margin-bottom: 2rem;
+    text-align: center;
   }
 `;
 export const RecommandationStyled = styled.div`
@@ -100,7 +111,7 @@ export const ActorSection = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    /* padding: 1rem; */
+    
   }
 `;
 export const ButtonContainer = styled.div`

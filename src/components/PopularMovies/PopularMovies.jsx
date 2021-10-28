@@ -12,10 +12,19 @@ const PopularMovieStyled = styled.div`
   padding: 1rem;
 `;
 let item = 4;
-if (window.screen.width < 600) {
-  item = 1;
-}
-console.log(window.screen.width);
+
+const breakPoints = [
+  { width: 200, itemsToShow: 1, itemsToScroll:2},
+
+  { width: 450, itemsToShow: 2, itemsToScroll:2},
+  { width: 550, itemsToShow: 3,  pagination: true },
+  { width: 750, itemsToShow: 4 },
+  { width: 850, itemsToShow: 4 },
+  { width: 1150, itemsToShow: 4, itemsToScroll: 2 },
+  { width: 1450, itemsToShow: 5 },
+  { width: 1750, itemsToShow: 6 },
+]
+
 export default function PopularMovies({ popularMovies }) {
   let PopularMoviesArray = [];
   for (let index in popularMovies) {
@@ -23,8 +32,9 @@ export default function PopularMovies({ popularMovies }) {
   }
   return (
     <PopularMovieStyled>
-      <Carousel itemsToShow={item}>
-        {PopularMoviesArray.map((movie) => {
+      <Carousel itemsToShow={item} breakPoints={breakPoints}>
+        {PopularMoviesArray.map((movie, index) => {
+          console.log("movie popular", movie)
           return (
             <CardContainer
               src={poster + movie.poster_path}
@@ -33,6 +43,7 @@ export default function PopularMovies({ popularMovies }) {
               details={`${movie.overview}`}
               id={movie.id}
               type="movie"
+              key={index}
             />
           );
         })}

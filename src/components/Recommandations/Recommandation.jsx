@@ -27,14 +27,14 @@ const Recommandation = ({ urlSegment }) => {
   } else {
     return recommandations.map((movie, index) => {
       return (
-        <div>
+        <div key={index}>
           <CardContainer
             src={poster + movie.poster_path}
             title={movie.title ? movie.title : movie.name}
             details={`${movie.overview}`}
             id={movie.id}
             type={movie.media_type}
-            key={index}
+            
           />
         </div>
       );

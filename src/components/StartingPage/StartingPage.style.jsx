@@ -31,14 +31,33 @@ export const StyledStartingPage = styled.div`
     color: #0275d8;
     font-size: 3rem;
     font-weight: 700;
+    text-align: center;
   }
   .text {
     color: #fff;
     font-size: 1.1rem;
     padding-bottom: 1rem;
     padding-top: 1rem;
+    text-align: center;
   }
   .btn {
     margin-top: 1.5rem;
+  }
+  
+  @media only screen and (max-width:770px){
+    .welcomeText {
+    color: #0275d8;
+    font-size: 2.3rem;
+    font-weight: 700;
+    text-align: center;
+  }
+  .text {
+    color: #fff;
+    font-size: 1rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    text-align: center;
+  }
+
   }
 `;

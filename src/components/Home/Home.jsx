@@ -33,7 +33,7 @@ const Home = () => {
     <>
       <WelcomePage />
       <HomeTrendingSection>
-        <h1>A la une</h1>
+        <h1>Tendance</h1>
         <Trending moviesTrending={trend} />
       </HomeTrendingSection>
       <HomePopularSection>

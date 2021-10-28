@@ -12,7 +12,7 @@ import {
   ActiveGenre,
   TvSectionStyle,
 } from "./SerieStyle";
-// import SpinnerLoader from "../Loader/Spinner";
+
 
 const Series = () => {
   const [tvPopular, setTvPopular] = useState();
@@ -49,9 +49,9 @@ const Series = () => {
 
   const displayTvGenres = () => {
     if (tvGenre) {
-      return tvGenre.map((genre) => {
+      return tvGenre.map((genre,index) => {
         return (
-          <div
+          <div key={index}
             className="tvGenre"
             onClick={() => {
               setTvGenreId(genre.id);
@@ -99,9 +99,9 @@ const Series = () => {
         arrayPopularTv.push(tvPopular[index]);
       }
     }
-    return arrayPopularTv.map((tvpopular) => {
+    return arrayPopularTv.map((tvpopular,index) => {
       return (
-        <div>
+        <div key={index}>
           <CardContainer
             src={imgUrl + tvpopular.poster_path}
             title={tvpopular.title ? tvpopular.title : tvpopular.name}

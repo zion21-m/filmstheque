@@ -19,6 +19,7 @@ const Movies = () => {
   const [moviesGenre, setMoviesGenre] = useState([]);
   const [movieGenreId, setMovieGenreId] = useState("");
   const [activeGenre, setActiveGenre] = useState("Tous les films");
+ 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -43,13 +44,14 @@ const Movies = () => {
 
   const displayMoviesGenres = () => {
     if (moviesGenre) {
-      return moviesGenre.map((genre) => {
+      return moviesGenre.map((genre, index) => {
         return (
-          <button
-            className="movieGenre"
+          <button key={index}
+            className= {"movieGenre"}
             onClick={() => {
               setMovieGenreId(genre.id);
               setActiveGenre(genre.name);
+              
             }}
           >
             {genre.name}
@@ -98,7 +100,7 @@ const Movies = () => {
     return <Loader />;
   } else {
     const renderMoviesByPopularity = () => {
-      return arrayMoviesByPopularity.map((movie) => {
+      return arrayMoviesByPopularity.map((movie, index) => {
         return (
           <CardContainer
             src={imgUrl + movie.poster_path}
@@ -108,6 +110,7 @@ const Movies = () => {
             id={movie.id}
             type="movie"
             loading={loading}
+            key={index}
           />
         );
       });

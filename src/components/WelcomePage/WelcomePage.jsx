@@ -1,49 +1,7 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
 import Carousel from "react-bootstrap/Carousel";
 import Loader from "../Loader/Loader";
-
-const WelcomePageStyled = styled.section`
-  width: 100%;
-  height: auto;
-  background-color: #353535;
-
-  .carousel-control-next-icon,
-  .carousel-control-prev-icon {
-    background-color: #0765ff;
-  }
-
-  .movie-container {
-    position: relative;
-  }
-  .welcome-image {
-    opacity: 0.6;
-    filter: grayscale(40%);
-  }
-  .movie-information {
-    position: absolute;
-    bottom: 200px;
-    left: -300px;
-    font-size: 18px;
-    color: #e5e5e5;
-    font-size: 2rem;
-  }
-  .movie-title {
-    font-size: 4rem;
-    color: #ffa106;
-    font-weight: bold;
-  }
-  .movie-name {
-    color: #ffa106;
-    font-weight: bold;
-  }
-  .rec.rec-arrow {
-    background-color: rgba(0, 0, 0, 1);
-  }
-  .rec.rec-dot {
-    background-color: rgba(255, 255, 255, 1);
-  }
-`;
+import { WelcomePageStyled } from "./WelcomePage.style";
 
 const WelcomePage = () => {
   const [upComingMovies, setUpComingMovies] = useState();
@@ -78,7 +36,7 @@ const WelcomePage = () => {
       >
         {arrayUpcomingMovies.map((upComingMovie) => {
           return (
-            <Carousel.Item interval={3000} key={upComingMovie.id}>
+            <Carousel.Item interval={3000} key={upComingMovie.id} className="caroussel-container">
               <img
                 className="d-block w-100 welcome-image"
                 src={imgUrl + upComingMovie.backdrop_path}
@@ -98,6 +56,8 @@ const WelcomePage = () => {
       </Carousel>
     );
   };
+
+ 
   if (!upComingMovies) {
     return (
       <WelcomePageStyled>

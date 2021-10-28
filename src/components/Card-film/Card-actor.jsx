@@ -8,8 +8,9 @@ const CardStyled = styled.div`
   font-size: 1rem;
   background-color: #e5e5e5;
   margin: 0.5rem 0.5rem;
+  width:150px;
   .img-container {
-    max-width: 150px;
+    max-width: 120px;
     border-radius: 8px;
   }
   .actorImg {

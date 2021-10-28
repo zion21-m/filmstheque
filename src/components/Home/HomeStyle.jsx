@@ -4,16 +4,19 @@ export const HomeTrendingSection = styled.section`
   padding: 4rem 1rem;
   background: #e5e5e5;
   h1 {
-    font-size: 2rem;
-    margin-left: 5rem;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 30px;
   }
 `;
 export const HomePopularSection = styled.section`
   padding: 4rem 1rem;
   background: #191919;
   h1 {
-    font-size: 2rem;
-    margin-left: 5rem;
+    text-align: center;
+    font-size: 2.2rem;
     color: #fff;
+    margin-bottom: 30px;
+
   }
 `;
